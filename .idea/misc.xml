@@ -7,6 +7,7 @@
         <entry key="app/src/main/res/drawable/mypage_icon_active.xml" value="0.312" />
         <entry key="app/src/main/res/drawable/mypage_icon_inactive.xml" value="0.312" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/activity_messagebox.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/activity_mypost.xml" value="0.40260416666666665" />
         <entry key="app/src/main/res/layout/bottom_navigation.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/bottom_navigation_board.xml" value="0.40260416666666665" />
