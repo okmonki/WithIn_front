@@ -4,14 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
+    <ImageButton
         android:id="@+id/menu_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
+        android:background="@android:color/transparent"
         android:src="@drawable/menu_icon_inactive"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/menu_txt"
@@ -25,10 +26,11 @@
         app:layout_constraintStart_toStartOf="@id/menu_icon"
         app:layout_constraintTop_toBottomOf="@id/menu_icon" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/board_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         android:src="@drawable/board_icon_inactive"
         app:layout_constraintEnd_toEndOf="@id/mypage_icon"
         app:layout_constraintStart_toStartOf="@id/menu_icon"
@@ -44,11 +46,12 @@
         app:layout_constraintStart_toStartOf="@id/board_icon"
         app:layout_constraintTop_toBottomOf="@id/board_icon" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/mypage_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
+        android:background="@android:color/transparent"
         android:src="@drawable/mypage_icon_inactive"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
