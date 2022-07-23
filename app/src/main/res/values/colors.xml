@@ -7,11 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-<<<<<<< HEAD
     <color name="backgroundColor">#006FFD</color>
     <color name="fontsColor">#8F9098</color>
-=======
-
     <color name="Highlight1">#006FFD</color>
     <color name="Highlight2">#2897FF</color>
     <color name="Highlight3">#6FBAFF</color>
@@ -41,5 +38,4 @@
     <color name="Error1">#ED3241</color>
     <color name="Error2">#FF616D</color>
     <color name="Error3">#FFE2E5</color>
->>>>>>> 88ec037b2bcc114815a120add88aa8a8c76d5154
 </resources>
