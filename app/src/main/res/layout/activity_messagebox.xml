@@ -22,8 +22,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
         android:text="쪽지함"
-        android:textSize="24sp"
         android:textColor="@color/black"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/back_button"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,12 +32,17 @@
         android:id="@+id/messagebox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintHeight="true"
         app:layout_constraintTop_toBottomOf="@id/messagebox_title"
-        android:layout_marginTop="40dp"/>
+        app:layout_constraintVertical_bias="0.0" />
 
-    <include layout="@layout/bottom_navigation_mypage"
+    <include
+        android:id="@+id/bottom_navigation"
+        layout="@layout/bottom_navigation_mypage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
