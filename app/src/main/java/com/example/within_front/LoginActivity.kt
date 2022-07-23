@@ -1,4 +1,7 @@
 package com.example.within_front
 
-class LoginActivity {
+import androidx.appcompat.app.AppCompatActivity
+
+class LoginActivity : AppCompatActivity(){
+    imageView.setImageResource(R.drawable.logo)
 }
