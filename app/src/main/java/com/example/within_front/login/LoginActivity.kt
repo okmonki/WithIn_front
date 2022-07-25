@@ -138,6 +138,28 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+//    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//        // TODO("Not yet implemented")
+//    }
+
+//    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//        val emailFromUser = emailEditText.text.toString()
+//        val passWordFromUser = passwordEditText.text.toString()
+//        if (!emailFromUser.isNullOrBlank() && !passWordFromUser.isNullOrBlank()) {
+//            loginButton.background = getDrawable(R.drawable.activate_button_background)
+//            loginButton.isEnabled = true
+//        } else if (emailFromUser.isNullOrBlank()) {
+//            emailEditText.background = getDrawable(R.drawable.edittext_background)
+//            loginButton.isEnabled = false
+//        } else if (passWordFromUser.isNullOrBlank()) {
+//            passwordEditText.background = getDrawable(R.drawable.edittext_background)
+//            loginButton.isEnabled = false
+//        } else {
+//            loginButton.background = getDrawable(R.drawable.inactivate_button_background)
+//            loginButton.isEnabled = false
+//        }
+//    }
+
     private fun setPasswordShowingState() {
         eyeImageButton.setOnClickListener {
             // 비밀번호가 보이지 않는 상태. eye_open
