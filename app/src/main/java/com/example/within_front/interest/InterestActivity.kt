@@ -9,6 +9,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.within_front.R
 
 class InterestActivity : AppCompatActivity() {
+    val interestGroupSpinner: Spinner by lazy{
+        findViewById(R.id.interestSpinner0)
+    }
+    val interestJobSpinner: Spinner by lazy{
+        findViewById(R.id.interestSpinner1)}
+
     val interestMBTISpinner: Spinner by lazy{
         findViewById(R.id.interestSpinner2)}
 
@@ -16,6 +22,10 @@ class InterestActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_interest) //view 연결
 
+        val interestJobList= listOf("")
+        //**
+        //* MBTI 선택 로직
+        //**
         val interestMBTIList= listOf("INFJ","INFP","ENFJ","ENFP","ISTJ","ISFJ","ESTJ","ESFJ","ISTP","ISFP","ESTP","ESFP")
         var interestMBTIAdapter = ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, interestMBTIList)
         interestMBTISpinner.adapter=interestMBTIAdapter
