@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".my_page.MyPageActivity" />
+        <activity android:name=".my_page.MyGroupReadActivity" />
     </application>
 
 </manifest>
