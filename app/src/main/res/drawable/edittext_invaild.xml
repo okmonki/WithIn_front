@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- EditText 가 포커스를 받지 않은 일반 상태일 때의 모양 및 색상 -->
+    <item android:state_focused="false">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android"
+            android:shape="rectangle">
+            <padding android:top="16dp" android:bottom="16dp" android:left="16dp" android:right="16dp"/>
+            <stroke
+                android:width="2dp"
+                android:color="@color/Error1" />
+            <corners android:radius="12dp"/>
+            <solid
+                android:color="@color/white" />
+        </shape>
+
+    </item>
+</selector>
