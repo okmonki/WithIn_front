@@ -13,12 +13,14 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import com.example.within_front.R
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class LoginActivity : AppCompatActivity() {
+
 
     val logoImageView: ImageView by lazy {
         findViewById(R.id.logoImageView)
@@ -29,8 +31,12 @@ class LoginActivity : AppCompatActivity() {
     val passwordEditText: EditText by lazy {
         findViewById(R.id.loginPasswordEditText)
     }
-    val eyeImageButton: ImageButton by lazy {
+    val eyeCloseImageButton: ImageButton by lazy {
         findViewById(R.id.check_password_1)
+    }
+
+    val eyeOpenImageButton: ImageButton by lazy {
+        findViewById(R.id.eyeOpenImageButton)
     }
 
     val loginButton: AppCompatButton by lazy {
@@ -49,10 +55,10 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         initEmailAndPasswordEnable()
+        setPasswordShowingState()
         checkEmailTextWatcher()
         initLoginButton()
         //initSignupButton()
-
 
     }
 
@@ -97,15 +103,6 @@ class LoginActivity : AppCompatActivity() {
             }
         })
 
-        loginButton.setOnClickListener {
-            if(!checkEmail()){ //틀린 경우
-                Toast.makeText(applicationContext,"이메일 형식에 맞게 입력하세요!",Toast.LENGTH_LONG).show()
-            }
-            else{ //맞는 경우
-                Toast.makeText(applicationContext,"로그인 됐습니다.",Toast.LENGTH_LONG).show()
-                initLoginButton()
-            }
-        }
     }
 
 //    private fun initSignupButton() {
@@ -116,15 +113,21 @@ class LoginActivity : AppCompatActivity() {
 //        }
 //    }
 
-
     private fun initLoginButton() {
         //login 버튼이 눌린다면
         loginButton.setOnClickListener {
             val email=getInputEmail()
             val password=getInputPassword()
+            if(!checkEmail()){ //틀린 경우
+                Log.d("test", "fail")
+                Toast.makeText(this,"이메일 형식에 맞게 입력하세요!",Toast.LENGTH_SHORT).show()
+            }
+            else{ //맞는 경우
+                Toast.makeText(this,"로그인 됐습니다.",Toast.LENGTH_SHORT).show()
+                initLoginButton()
+            }
         }
     }
-
     private fun initEmailAndPasswordEnable() {
         emailEditText.addTextChangedListener {
             val enable=emailEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty()
@@ -142,35 +145,32 @@ class LoginActivity : AppCompatActivity() {
 //        // TODO("Not yet implemented")
 //    }
 
-//    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//        val emailFromUser = emailEditText.text.toString()
-//        val passWordFromUser = passwordEditText.text.toString()
-//        if (!emailFromUser.isNullOrBlank() && !passWordFromUser.isNullOrBlank()) {
-//            loginButton.background = getDrawable(R.drawable.activate_button_background)
-//            loginButton.isEnabled = true
-//        } else if (emailFromUser.isNullOrBlank()) {
-//            emailEditText.background = getDrawable(R.drawable.edittext_background)
-//            loginButton.isEnabled = false
-//        } else if (passWordFromUser.isNullOrBlank()) {
-//            passwordEditText.background = getDrawable(R.drawable.edittext_background)
-//            loginButton.isEnabled = false
-//        } else {
-//            loginButton.background = getDrawable(R.drawable.inactivate_button_background)
-//            loginButton.isEnabled = false
-//        }
-//    }
 
     private fun setPasswordShowingState() {
-        eyeImageButton.setOnClickListener {
+        eyeCloseImageButton.setOnClickListener {
             // 비밀번호가 보이지 않는 상태. eye_open
             if (!isPasswordShowing) {
                 isPasswordShowing = true
-                eyeImageButton.background = getDrawable(R.drawable.check_password)
+                eyeCloseImageButton.visibility = View.VISIBLE
+                eyeOpenImageButton.visibility = View.GONE
                 passwordEditText.transformationMethod = HideReturnsTransformationMethod.getInstance()
-            } else {
-                // 비밀번호가 보이는 상태. eye_close
+            } else{
                 isPasswordShowing = false
-                eyeImageButton.background = getDrawable(R.drawable.eye_open)
+                eyeCloseImageButton.visibility = View.GONE
+                eyeOpenImageButton.visibility = View.VISIBLE
+                passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+            }
+        }
+        eyeOpenImageButton.setOnClickListener(){
+            if (!isPasswordShowing) {
+                isPasswordShowing = true
+                eyeOpenImageButton.visibility = View.GONE
+                eyeCloseImageButton.visibility = View.VISIBLE
+                passwordEditText.transformationMethod = HideReturnsTransformationMethod.getInstance()
+            }else{
+                isPasswordShowing = false
+                eyeOpenImageButton.visibility = View.VISIBLE
+                eyeCloseImageButton.visibility = View.GONE
                 passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
             }
         }
