@@ -6,13 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.within_front.R
 
-class MyPostActivity : AppCompatActivity() {
+class MessageBoxActivity : AppCompatActivity() {
 
-    private val myPostContainer : RecyclerView by lazy{
-        findViewById(R.id.my_post_container)
+    private val messageBoxContainer : RecyclerView by lazy{
+        findViewById(R.id.messagebox_container)
     }
 
-    private val myPostList = mutableListOf<Post>()
+    private val messageList = mutableListOf<Message>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,9 +21,9 @@ class MyPostActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerView(){
-        myPostContainer.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        myPostContainer.setHasFixedSize(true)
+        messageBoxContainer.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        messageBoxContainer.setHasFixedSize(true)
 
-        myPostContainer.adapter = MyPostAdapter(this, myPostList)
+        messageBoxContainer.adapter = MessageAdapter(this, messageList)
     }
 }
