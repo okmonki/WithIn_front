@@ -24,6 +24,7 @@
         </activity>
         <activity android:name=".my_page.MyPageActivity" />
         <activity android:name=".my_page.MyGroupReadActivity" />
+        <activity android:name=".my_page.MyGroupUpdateActivity" />
     </application>
 
 </manifest>
