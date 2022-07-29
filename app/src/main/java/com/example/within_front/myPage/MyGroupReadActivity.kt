@@ -11,7 +11,7 @@ class MyGroupReadActivity : AppCompatActivity() {
         findViewById(R.id.back_button)
     }
     private val createButton : ImageButton by lazy{
-        findViewById(R.id.create_button)
+        findViewById(R.id.modify_button)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
