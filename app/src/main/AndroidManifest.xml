@@ -22,6 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".menu.MenuActivity"/>
+        <activity android:name=".menu.CalendarActivity"/>
         <activity android:name=".LoginActivity"/>
     </application>
 
