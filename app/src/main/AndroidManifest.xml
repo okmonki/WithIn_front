@@ -22,9 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".my_page.MyPageActivity" />
-        <activity android:name=".my_page.MyGroupReadActivity" />
-        <activity android:name=".my_page.MyGroupUpdateActivity" />
+        <activity android:name=".myPage.MyPageActivity" />
+        <activity android:name=".myPage.MyGroupReadActivity" />
+        <activity android:name=".myPage.MyGroupUpdateActivity" />
     </application>
 
 </manifest>

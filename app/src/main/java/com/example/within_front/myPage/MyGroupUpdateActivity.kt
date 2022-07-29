@@ -1,4 +1,4 @@
-package com.example.within_front.my_page
+package com.example.within_front.myPage
 
 import android.os.Bundle
 import android.view.View

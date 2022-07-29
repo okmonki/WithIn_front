@@ -1,4 +1,4 @@
-package com.example.within_front.my_page
+package com.example.within_front.myPage
 
 import android.content.Intent
 import android.os.Bundle
