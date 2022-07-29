@@ -50,9 +50,11 @@
             android:layout_width="175dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="0dp"
             android:textColor="@color/black"
             android:textSize="24sp"
+            app:layout_constraintTop_toTopOf="@id/interestTextView1"
+            app:layout_constraintBottom_toBottomOf="@id/interestTextView1"
             app:layout_constraintStart_toEndOf="@id/interestTextView1"
             app:layout_constraintTop_toBottomOf="@id/interestTextView0" />
 
@@ -112,9 +114,11 @@
             android:layout_width="116dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="90dp"
+            android:layout_marginTop="0dp"
             android:textColor="@color/black"
             android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@id/interestTextView4"
+            app:layout_constraintTop_toTopOf="@id/interestTextView4"
             app:layout_constraintStart_toEndOf="@id/interestTextView4"
             app:layout_constraintTop_toBottomOf="@id/interestSpinner0" />
 

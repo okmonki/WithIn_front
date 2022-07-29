@@ -102,7 +102,6 @@ class LoginActivity : AppCompatActivity() {
                 checkEmail()
             }
         })
-
     }
 
 //    private fun initSignupButton() {
