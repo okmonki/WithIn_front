@@ -22,6 +22,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".login.LoginActivity"/>
+        <activity android:name=".login.InterestActivity"/>
+        <activity android:name=".myPage.MyPageActivity" />
+        <activity android:name=".myPage.MyGroupReadActivity" />
+        <activity android:name=".myPage.MyGroupUpdateActivity" />
+        <activity android:name=".menu.MenuActivity"/>
+        <activity android:name=".menu.CalendarActivity"/>
     </application>
 
 </manifest>
