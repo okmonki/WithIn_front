@@ -99,7 +99,7 @@
         android:background="@drawable/button_rounded_corner_rectangle"
         android:backgroundTint="@color/white"
         android:text="회원가입"
-        android:textColor="@color/backgroundColor"
+        android:textColor="@color/Highlight1"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

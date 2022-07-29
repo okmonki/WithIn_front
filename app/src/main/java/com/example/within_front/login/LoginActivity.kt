@@ -78,8 +78,7 @@ class LoginActivity : AppCompatActivity() {
             emailEditText.setTextColor(R.color.black.toInt())
             true
         } else {
-            emailEditText.setTextColor(-65536)
-            //또는 questionEmail.setTextColor(R.color.red.toInt())
+            emailEditText.setTextColor(R.color.red.toInt())
             false
         }
     }
