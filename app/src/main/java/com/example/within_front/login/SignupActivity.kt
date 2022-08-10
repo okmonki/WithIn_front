@@ -118,6 +118,8 @@ class SignupActivity : AppCompatActivity() {
         return isPasswordValid
     }
     private fun isSamePassword(reconfirmPassword: String): Boolean {
+
+
         val password = editTextPassword.text.toString()
         isPasswordReconfirm = (password == reconfirmPassword)
         changeVisibility(warningPasswordReconfirm, isPasswordReconfirm)
