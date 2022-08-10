@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import com.example.within_front.R
+import com.example.within_front.login.LoginActivity
 
 class MyPageActivity : AppCompatActivity() {
     private val myGroupButton: AppCompatButton by lazy {

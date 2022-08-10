@@ -27,7 +27,6 @@ class MyPostAdapter(val mContext: Context, val myPostList : MutableList<Post>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.my_post_item, parent, false)
         return CustomViewHolder(view).apply{
-
         }
     }
 
