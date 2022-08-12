@@ -10,6 +10,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="fontsColor">#8F9098</color>
     <color name="Highlight1">#3DF7D3</color>
+    <color name="backgroundColor">#006FFD</color>
     <color name="Highlight2">#2897FF</color>
     <color name="Highlight3">#6FBAFF</color>
     <color name="Highlight4">#B4DBFF</color>
