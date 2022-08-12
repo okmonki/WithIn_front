@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/content_title"
+        android:id="@+id/post_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -39,18 +39,18 @@
         android:layout_marginTop="8dp"
         android:textColor="@color/Dark4"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@id/content_title"
-        app:layout_constraintTop_toBottomOf="@id/content_title"
+        app:layout_constraintStart_toStartOf="@id/post_title"
+        app:layout_constraintTop_toBottomOf="@id/post_title"
         tools:text="내용 미리보기~~"/>
 
     <TextView
-        android:id="@+id/writer"
+        android:id="@+id/author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/Dark5"
         android:textSize="9sp"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@id/content_title"
+        app:layout_constraintStart_toStartOf="@id/post_title"
         app:layout_constraintTop_toBottomOf="@id/content"
         tools:text="18 : 32 | 작성자 닉네임 또는 익명"/>
 
@@ -59,8 +59,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/Highlight1"
-        app:layout_constraintTop_toTopOf="@id/writer"
-        app:layout_constraintBottom_toBottomOf="@id/writer"
+        app:layout_constraintTop_toTopOf="@id/author"
+        app:layout_constraintBottom_toBottomOf="@id/author"
         app:layout_constraintEnd_toEndOf="@id/division_line"
         android:layout_marginEnd="8dp"
         android:textSize="9sp"
@@ -83,8 +83,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/red"
-        app:layout_constraintTop_toTopOf="@id/writer"
-        app:layout_constraintBottom_toBottomOf="@id/writer"
+        app:layout_constraintTop_toTopOf="@id/author"
+        app:layout_constraintBottom_toBottomOf="@id/author"
         app:layout_constraintEnd_toStartOf="@id/comment_img"
         android:layout_marginEnd="12dp"
         android:textSize="9sp"
