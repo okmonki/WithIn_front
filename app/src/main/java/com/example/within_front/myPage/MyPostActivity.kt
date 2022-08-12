@@ -40,7 +40,7 @@ class MyPostActivity : AppCompatActivity() {
 
         client.newCall(getMyPostRequest).enqueue(object: Callback {
             override fun onFailure(call: Call, e: IOException) {
-                Log.d("connection error", "인터넷 연결 불안정")
+                Log.d("fail", "내가 쓴 글 조회 실패")
                 runOnUiThread{
                     Toast.makeText(
                         this@MyPostActivity,
