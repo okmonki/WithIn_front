@@ -108,7 +108,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
 //    private fun initSignupButton() {
-//        아직 SignUp 페이지랑 merge 안해서 빨간색 글씨
 //        signUpButton.setOnClickListener {
 //            val intent = Intent(this, SignUp.SignupActivity::class.java)
 //            startActivity(intent)
@@ -120,16 +119,23 @@ class LoginActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
             val email=getInputEmail()
             val password=getInputPassword()
+
             if(!checkEmail()){ //틀린 경우
                 Log.d("test", "fail")
                 Toast.makeText(this,"이메일 형식에 맞게 입력하세요!",Toast.LENGTH_SHORT).show()
             }
-            else{ //맞는 경우
-                Toast.makeText(this,"로그인 됐습니다.",Toast.LENGTH_SHORT).show()
-                initLoginButton()
-            }
+
+            auth.signInWithEmailAndPassword(email,password)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        finish()
+                    } else {
+                        Toast.makeText(this,"로그인에 실패하였습니다. 이메일 또는 비밀번호를 확인해주세요.",Toast.LENGTH_SHORT).show()
+                    }
+                }
         }
     }
+
     private fun initEmailAndPasswordEnable() {
         emailEditText.addTextChangedListener {
             val enable=emailEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty()
