@@ -1,4 +1,4 @@
-//package com.example.within_front.board
-//
-//class PostActivity {
-//}
+package com.example.within_front.board
+
+class PostActivity {
+}
