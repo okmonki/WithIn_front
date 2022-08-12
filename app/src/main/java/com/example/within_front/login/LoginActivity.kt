@@ -21,7 +21,6 @@ import java.util.regex.Pattern
 
 class LoginActivity : AppCompatActivity() {
 
-
     val logoImageView: ImageView by lazy {
         findViewById(R.id.logoImageView)
     }
