@@ -9,4 +9,34 @@
     <color name="white">#FFFFFFFF</color>
     <color name="backgroundColor">#006FFD</color>
     <color name="fontsColor">#8F9098</color>
+
+    <color name="Highlight1">#006FFD</color>
+    <color name="Highlight2">#2897FF</color>
+    <color name="Highlight3">#6FBAFF</color>
+    <color name="Highlight4">#B4DBFF</color>
+    <color name="Highlight5">#EAF2FF</color>
+
+    <color name="Light1">#C5C6CC</color>
+    <color name="Light2">#D4D6DD</color>
+    <color name="Light3">#E8E9F1</color>
+    <color name="Light4">#F8F9FE</color>
+    <color name="Light5">#FFFFFF</color>
+
+    <color name="Dark1">#1F2024</color>
+    <color name="Dark2">#2F3036</color>
+    <color name="Dark3">#494A50</color>
+    <color name="Dark4">#71727A</color>
+    <color name="Dark5">#8F9098</color>
+
+    <color name="Success1">#298267</color>
+    <color name="Success2">#3AC0A0</color>
+    <color name="Success3">#E7F4E8</color>
+
+    <color name="Warning1">#E86339</color>
+    <color name="Warning2">#FFB37C</color>
+    <color name="Warning3">#FFF4E4</color>
+
+    <color name="Error1">#ED3241</color>
+    <color name="Error2">#FF616D</color>
+    <color name="Error3">#FFE2E5</color>
 </resources>
