@@ -3,7 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/edittext_basic.xml" value="0.173" />
+        <entry key="app/src/main/res/drawable/edittext_board.xml" value="0.173" />
+        <entry key="app/src/main/res/drawable/edittext_invaild.xml" value="0.173" />
+        <entry key="app/src/main/res/drawable/edittext_onfocus.xml" value="0.173" />
+        <entry key="app/src/main/res/drawable/edittext_rounded_corner_rectangle.xml" value="0.173" />
         <entry key="app/src/main/res/drawable/logo.xml" value="0.47885498046874997" />
+        <entry key="app/src/main/res/layout/activity_board.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/activity_board_post.xml" value="0.22751420743203576" />
+        <entry key="app/src/main/res/layout/activity_interest.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.4036949072686131" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1887031408308004" />
       </map>

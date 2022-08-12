@@ -16,10 +16,13 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import com.example.within_front.R
+import com.google.firebase.auth.FirebaseAuth
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class LoginActivity : AppCompatActivity() {
+
+    private lateinit var auth : FirebaseAuth
 
     val logoImageView: ImageView by lazy {
         findViewById(R.id.logoImageView)
@@ -52,6 +55,8 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        auth=FirebaseAuth.getInstance()
 
         initEmailAndPasswordEnable()
         setPasswordShowingState()
