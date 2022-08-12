@@ -108,6 +108,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
 //    private fun initSignupButton() {
+//        아직 SignUp 페이지랑 merge 안해서 빨간색 글씨
 //        signUpButton.setOnClickListener {
 //            val intent = Intent(this, SignUp.SignupActivity::class.java)
 //            startActivity(intent)
