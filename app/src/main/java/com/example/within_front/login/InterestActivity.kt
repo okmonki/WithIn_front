@@ -8,8 +8,15 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import com.example.within_front.R
+import okhttp3.*
+import org.json.JSONArray
+import org.json.JSONObject
+import java.io.IOException
 
 class InterestActivity : AppCompatActivity() {
+
+    private val client = OkHttpClient()
+
     val interestGroupSpinner: Spinner by lazy{
         findViewById(R.id.interestSpinner0)
     }
