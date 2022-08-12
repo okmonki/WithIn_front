@@ -1,6 +1,7 @@
 package com.example.within_front.menu
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,9 +21,7 @@ class MenuAdapter(val mContext: Context, val menuList : MutableList<Menu>) : Rec
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.menu_item, parent, false)
-        return CustomViewHolder(view).apply{
-
-        }
+        return CustomViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {

@@ -1,5 +1,6 @@
 package com.example.within_front.menu
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.CalendarView
 import androidx.appcompat.app.AppCompatActivity
@@ -20,5 +21,10 @@ class CalendarActivity : AppCompatActivity() {
 
     private fun initCalendar(){
         calendar.date = System.currentTimeMillis()
+        calendar.setOnDateChangeListener { _, year, month, dayOfMonth ->
+            val intent = Intent(this, MenuActivity::class.java)
+            intent.putExtra("date", "$year-$month-$dayOfMonth")
+            startActivity(intent)
+        }
     }
 }
