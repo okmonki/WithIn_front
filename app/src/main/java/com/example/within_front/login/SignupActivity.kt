@@ -2,6 +2,8 @@ package com.example.within_front.login
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.util.Patterns
 import android.view.View
@@ -25,6 +27,22 @@ class SignupActivity : AppCompatActivity() {
         findViewById(R.id.btn_submit)
     }
 
+    // check Password (eye image)
+    private val eyeClosePassword: ImageButton by lazy {
+        findViewById(R.id.check_password_1)
+    }
+    private val eyeClosePasswordReconfirm: ImageButton by lazy {
+        findViewById(R.id.check_password_2)
+    }
+    private val eyeOpenPassword: ImageButton by lazy {
+        findViewById(R.id.eye_open_1)
+    }
+    private val eyeOpenPasswordReconfirm: ImageButton by lazy {
+        findViewById(R.id.eye_open_2)
+    }
+
+
+    // editText
     private val editTextEmail : EditText by lazy {
         findViewById(R.id.get_email)
     }
@@ -34,10 +52,11 @@ class SignupActivity : AppCompatActivity() {
     private val editTextPassword : EditText by lazy {
         findViewById(R.id.get_password)
     }
-    private val editTextPasswordCheck : EditText by lazy {
+    private val editTextPasswordReconfirm : EditText by lazy {
         findViewById(R.id.get_password_check)
     }
 
+    // warning
     private val warningEmailRepeat : TextView by lazy {
         findViewById(R.id.warning_email_repeat)
     }
@@ -63,6 +82,19 @@ class SignupActivity : AppCompatActivity() {
     private var isPasswordValid = false
     private var isPasswordReconfirm = false
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_signup)
+
+        initBackButton()
+        focusEditText(editTextEmail)
+        focusEditText(editTextNickname)
+        focusEditText(editTextPassword)
+        focusEditText(editTextPasswordReconfirm)
+        setPasswordShowingState(editTextPassword, eyeClosePassword, eyeOpenPassword)
+        setPasswordShowingState(editTextPasswordReconfirm, eyeClosePasswordReconfirm, eyeOpenPasswordReconfirm)
+    }
+
     private fun isValidEmail(email: String): Boolean {
         isEmailValid = !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches()
         changeVisibility(warningEmailInvalid, isEmailValid)
@@ -76,14 +108,16 @@ class SignupActivity : AppCompatActivity() {
     private fun isValidPassword(password: String): Boolean {
         isPasswordValid = password.matches("^(?=.*[a-zA-Z0-9])(?=.*[a-zA-Z!@#\$%^&*.])(?=.*[0-9!@#\$%^&*.]).{6,15}\$".toRegex())
         changeVisibility(warningPassword, isPasswordValid)
-//        if (isPasswordReconfirm) {
-//            val passwordReconfirm = editTextPassword.text.toString()
-//            if (passwordReconfirm != password) {
-//                isPasswordReconfirm = false
-//                changeVisibility(warningPasswordReconfirm, isPasswordReconfirm)
-//                editTextPasswordCheck.background = getDrawable(R.drawable.edittext_invaild)
-//            }
-//        }
+        val passwordReconfirm = editTextPasswordReconfirm.text.toString()
+        if (password != passwordReconfirm && passwordReconfirm.isNotEmpty()) {
+            editTextPasswordReconfirm.background = getDrawable(R.drawable.edittext_invaild)
+            changeVisibility(warningPasswordReconfirm, false)
+            isPasswordReconfirm = false
+        } else if (password == passwordReconfirm) {
+            editTextPasswordReconfirm.background = getDrawable(R.drawable.edittext_basic)
+            changeVisibility(warningPasswordReconfirm, true)
+            isPasswordReconfirm = true
+        }
         return isPasswordValid
     }
     private fun isSamePassword(reconfirmPassword: String): Boolean {
@@ -99,19 +133,6 @@ class SignupActivity : AppCompatActivity() {
         } else {
             view.visibility = View.VISIBLE
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_signup)
-        auth=FirebaseAuth.getInstance()
-
-        initBackButton()
-        focusEditText(editTextEmail)
-        focusEditText(editTextNickname)
-        focusEditText(editTextPassword)
-        focusEditText(editTextPasswordCheck)
-        submitButton()
     }
 
     private fun initBackButton(){
@@ -140,17 +161,33 @@ class SignupActivity : AppCompatActivity() {
                     view.background = getDrawable(R.drawable.edittext_invaild)
                 }
 
-                submitButton()
+                submitActivation()
             }
         }
     }
 
-    private fun submitButton() {
+    private fun submitActivation() {
         if (isEmailValid && isNicknameValid && isPasswordValid && isPasswordReconfirm) {
             btnSubmit.background = getDrawable(R.drawable.button_valid)
         } else {
             btnSubmit.background = getDrawable(R.drawable.button_basic)
         }
+    }
+
+    private fun setPasswordShowingState(editText: EditText, show: ImageButton, hide: ImageButton) {
+        show.setOnClickListener {
+            showPassword(hide, show)
+            editText.transformationMethod = HideReturnsTransformationMethod.getInstance()
+        }
+        hide.setOnClickListener {
+            showPassword(show, hide)
+            editText.transformationMethod = PasswordTransformationMethod.getInstance()
+        }
+    }
+
+    private fun showPassword(show: ImageButton, hide: ImageButton) {
+        show.visibility = View.VISIBLE
+        hide.visibility = View.GONE
     }
 
 }
