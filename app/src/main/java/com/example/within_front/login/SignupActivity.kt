@@ -151,8 +151,6 @@ class SignupActivity : AppCompatActivity() {
         } else {
             btnSubmit.background = getDrawable(R.drawable.button_basic)
         }
-        btnSubmit.setOnClickListener(new View.On{
-
-        }
+    }
 
 }

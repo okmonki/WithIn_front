@@ -12,10 +12,20 @@
         <entry key="app/src/main/res/drawable/logo.xml" value="0.47885498046874997" />
         <entry key="app/src/main/res/layout/activity_board.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/activity_board_post.xml" value="0.21887684678896288" />
+        <entry key="app/src/main/res/layout/activity_calendar.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/activity_interest.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.4036949072686131" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1887031408308004" />
+        <entry key="app/src/main/res/layout/activity_menu.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.25394897460937504" />
+        <entry key="app/src/main/res/layout/bottom_navigation_board.xml" value="0.2078125" />
+        <entry key="app/src/main/res/layout/bottom_navigation_menu.xml" value="0.2078125" />
+        <entry key="app/src/main/res/layout/bottom_navigation_mypage.xml" value="0.2078125" />
+        <entry key="app/src/main/res/layout/menu_item.xml" value="0.2078125" />
+        <entry key="app/src/main/res/layout/my_group_read.xml" value="0.2078125" />
+        <entry key="app/src/main/res/layout/my_group_update.xml" value="0.2078125" />
+        <entry key="app/src/main/res/layout/my_page.xml" value="0.2078125" />
+        <entry key="app/src/main/res/layout/my_post_item.xml" value="0.2078125" />
       </map>
     </option>
   </component>
