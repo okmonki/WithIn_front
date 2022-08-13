@@ -32,11 +32,11 @@ class MessageBoxActivity : AppCompatActivity() {
         messageBoxContainer.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         messageBoxContainer.setHasFixedSize(true)
 
-        messageBoxContainer.adapter = MessageAdapter(this, messageList)
+        messageBoxContainer.adapter = MessageBoxAdapter(this, messageList)
     }
 
     private fun getMyMessages(userId : Long){
-        val getMessageRequest = Request.Builder().addHeader("Content-Type", "application/json").url("http://localhost:8080/user/$userId/messages").build()
+        val getMessageRequest = Request.Builder().addHeader("Content-Type", "application/json").url("http://52.78.137.155:8080/user/$userId/messages").build()
         client.newCall(getMessageRequest).enqueue(object: Callback {
             override fun onFailure(call: Call, e: IOException) {
                 Log.d("fail", "내 메세지 조회 실패")

@@ -20,7 +20,7 @@ class MyPostActivity : AppCompatActivity() {
         findViewById(R.id.my_post_container)
     }
 
-    private var myPostList = mutableListOf<Post>()
+    private var myPostList = mutableListOf<MyPost>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +36,7 @@ class MyPostActivity : AppCompatActivity() {
     }
 
     private fun getMyPost(userId : Long){
-        val getMyPostRequest = Request.Builder().addHeader("Content-Type", "application/json").url("http:localhost:8080/user/$userId/posts").build()
+        val getMyPostRequest = Request.Builder().addHeader("Content-Type", "application/json").url("http:52.78.137.155:8080/user/$userId/posts").build()
 
         client.newCall(getMyPostRequest).enqueue(object: Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -63,7 +63,7 @@ class MyPostActivity : AppCompatActivity() {
                         val createdAt = tempPost.getString("createdAt")
                         val board = tempPost.getString("boeadName")
 
-                        val post = Post(nickname = author, boardName = board, content = content, date = createdAt)
+                        val post = MyPost(nickname = author, boardName = board, content = content, date = createdAt)
                         myPostList.add(post)
                     }
                     myPostList.reverse()

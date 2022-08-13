@@ -30,7 +30,7 @@
         tools:text="User" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/message_container"
+        android:id="@+id/message_chat_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
