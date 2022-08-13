@@ -2,6 +2,7 @@ package com.example.within_front.board
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +18,10 @@ class BoardActivity : AppCompatActivity() {
 
     private val client = OkHttpClient()
 
+    private val boardName : TextView by lazy {
+        findViewById(R.id.board)
+    }
+
     private val postContainer : RecyclerView by lazy{
         findViewById(R.id.posts)
     }
@@ -26,8 +31,13 @@ class BoardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board)
-//        initRecyclerView()
-        // TODO() getPost()
+        val intent = intent
+        val category = intent.getStringExtra("category")
+        getPost(category!!)
+        boardNaming(category!!)
+
+//        getPost("soccer")
+//        boardNaming("soccer")
     }
     private fun initRecyclerView(){
         postContainer.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -79,5 +89,9 @@ class BoardActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    private fun boardNaming(category : String) {
+        boardName.text = category.plus(" 게시판")
     }
 }

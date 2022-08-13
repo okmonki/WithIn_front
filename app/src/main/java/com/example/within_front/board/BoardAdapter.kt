@@ -1,6 +1,7 @@
 package com.example.within_front.board
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -18,13 +19,22 @@ class BoardAdapter(val context: Context, private var boardList : MutableList<Boa
         fun bind(board : Board){
             boardName.text = board.boardName
             boardExplanation.text = board.boardExplanation
-
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.board_item, parent, false)
-        return CustomViewHolder(view)
+        return CustomViewHolder(view).apply{
+            itemView.setOnClickListener{
+                val curPos = adapterPosition
+                val board = boardList[curPos]
+
+                val intent = Intent(context, BoardActivity::class.java)
+                intent.putExtra("category", board.boardName)
+
+                context.startActivity(intent)
+            }
+        }
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {

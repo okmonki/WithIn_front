@@ -18,6 +18,10 @@ class PostActivity : AppCompatActivity() {
 
     private val client = OkHttpClient()
 
+    // TextView
+    private val boardName : TextView by lazy {
+        findViewById(R.id.board)
+    }
     private val postTitle: TextView by lazy {
         findViewById(R.id.title)
     }
@@ -36,6 +40,8 @@ class PostActivity : AppCompatActivity() {
     private val date: TextView by lazy {
         findViewById(R.id.date)
     }
+
+
 
     private val commentContainer : RecyclerView by lazy{
         findViewById(R.id.comments)
@@ -123,6 +129,8 @@ class PostActivity : AppCompatActivity() {
                 if(response.code() == 200){
                     commentList = mutableListOf()
                     val tempPost = JSONObject(response.body()!!.string())
+
+                    boardName.text = tempPost.getString("boardName").plus(" 게시판")
                     postTitle.text = tempPost.getString("title")
                     author.text = tempPost.getString("authorNickname")
                     content.text = tempPost.getString("content")
