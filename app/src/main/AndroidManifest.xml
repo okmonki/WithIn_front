@@ -17,11 +17,7 @@
         android:theme="@style/Theme.WithIn_front"
         tools:targetApi="31">
         <activity
-<<<<<<< HEAD
             android:name=".board.WriteANewPostActivity"
-=======
-            android:name=".board.PostActivity"
->>>>>>> ff2b6b395cbee3d41a00cb89c0ff98791fc86e3c
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
