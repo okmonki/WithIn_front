@@ -17,12 +17,14 @@ import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import com.example.within_front.R
 import com.google.firebase.auth.FirebaseAuth
+import okhttp3.OkHttpClient
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth : FirebaseAuth
+    private val client = OkHttpClient()
 
     val logoImageView: ImageView by lazy {
         findViewById(R.id.logoImageView)
