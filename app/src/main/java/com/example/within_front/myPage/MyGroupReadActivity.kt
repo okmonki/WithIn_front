@@ -55,6 +55,7 @@ class MyGroupReadActivity : AppCompatActivity() {
     private fun initCreateButton() {
         createButton.setOnClickListener {
             val intent = Intent(this, MyGroupUpdateActivity::class.java)
+            finish()
             startActivity(intent)
         }
     }
