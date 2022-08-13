@@ -8,22 +8,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:fillViewport="true"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
-        android:layout_marginBottom="16dp"
-        >
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        >
-
     <ImageButton
         android:src="@drawable/ic_arrow_back_24px_rounded"
         android:id="@+id/arrowImg"
@@ -49,6 +33,10 @@
         app:layout_constraintStart_toEndOf="@id/arrowImg"
         android:layout_marginStart="8dp"
         />
+
+
+<!--    여기부터 네스트스크롤뷰 하면 될 듯-->
+
 
     <TextView
         android:text="제목"
@@ -79,7 +67,7 @@
         />
 
     <TextView
-        android:text="내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"
+        android:text="내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"
         android:id="@+id/content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -151,19 +139,49 @@
         android:textSize="9sp"
         tools:text="08/03 18:32" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/comments"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/like_img"
-            android:layout_marginTop="8dp"
-            app:layout_constrainedHeight="true"
-            app:layout_constraintVertical_bias="0"
-            android:nestedScrollingEnabled="false"
-        />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/comments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/like_img"
+        android:layout_marginTop="8dp"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintVertical_bias="0"
+        android:nestedScrollingEnabled="false"
+    />
 
-    </androidx.core.widget.NestedScrollView>
+<!--    여기까지 네스트 스크롤 뷰 하면 될 듯!
+        아래 editText에서 topbottom '네스트스크롤뷰'로 부탁드립니다. -->
+
+
+    <EditText
+        android:id="@+id/get_comment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/edittext_get_comment"
+        android:hint="댓글을 입력하세요."
+        android:textColor="@color/fontsColor"
+        android:textSize="14sp"
+        />
+
+    <ImageButton
+        android:layout_width="22dp"
+        android:layout_height="11dp"
+        app:layout_constraintEnd_toEndOf="@id/get_comment"
+        app:layout_constraintTop_toTopOf="@id/get_comment"
+        app:layout_constraintBottom_toBottomOf="@id/get_comment"
+        android:src="@drawable/bridge"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/white"
+        />
+
+<!--    </androidx.core.widget.NestedScrollView>-->
     <include layout="@layout/bottom_navigation_board"
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
