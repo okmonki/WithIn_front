@@ -152,7 +152,7 @@
         tools:text="08/03 18:32" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/contents"
+            android:id="@+id/comments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/like_img"
