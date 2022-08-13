@@ -1,18 +1,19 @@
 package com.example.within_front.board
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.within_front.R
-//import okhttp3.*
+import okhttp3.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 
 class PostActivity : AppCompatActivity() {
 
-//    private val client = OkHttpClient()
+    private val client = OkHttpClient()
 
     private val commentContainer : RecyclerView by lazy{
         findViewById(R.id.comments)
@@ -32,6 +33,7 @@ class PostActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post)
+        Log.d("test", commentList.size.toString())
         initRecyclerView()
     }
     private fun initRecyclerView(){
