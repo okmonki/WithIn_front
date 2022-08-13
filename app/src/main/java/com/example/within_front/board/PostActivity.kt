@@ -45,7 +45,7 @@ class PostActivity : AppCompatActivity() {
     }
 
     private fun getComment(postId : Long){
-        val getCommentRequest = Request.Builder().addHeader("Content-Type", "application/json").url("http:localhost:8080/post/boards/$postId/comments").build()
+        val getCommentRequest = Request.Builder().addHeader("Content-Type", "application/json").url("http://52.78.137.155:8080/post/boards/1/comments").build()
 
         client.newCall(getCommentRequest).enqueue(object: Callback {
             override fun onFailure(call: Call, e: IOException) {

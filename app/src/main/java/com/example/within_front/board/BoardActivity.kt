@@ -21,15 +21,15 @@ class BoardActivity : AppCompatActivity() {
         findViewById(R.id.posts)
     }
 
-    private var postList = mutableListOf<Post>(Post("포스트 테스트입니다.","SuperH0ng", "ㅂㄷ제ㅐㅑ겹제ㅐ댜겨베ㅐㄷ쟈겨망ㄴ러;ㅣㄴ아ㅓㄻ;ㅣㄴ아렅크춮,ㅡㅊㅌㅋ푸.,ㅋ틏푸;ㅇㄴ미ㅏ럼ㄴ이;ㅏㅓㄻㅇㄴ;ㅣ라ㅓ", 4, 7),
-        Post("포스트2","aaa", "포스트 본문 테스트입니다.", 4, 7),
-        Post("포스트3","bbb", "post content test", 4, 7),
-        Post("포스트 테스트입니다.","SuperH0ng", "ㅂㄷ제ㅐㅑ겹제ㅐ댜겨베ㅐㄷ쟈겨망ㄴ러;ㅣㄴ아ㅓㄻ;ㅣㄴ아렅크춮,ㅡㅊㅌㅋ푸.,ㅋ틏푸;ㅇㄴ미ㅏ럼ㄴ이;ㅏㅓㄻㅇㄴ;ㅣ라ㅓ", 4, 7),
-        Post("포스트2","aaa", "포스트 본문 테스트입니다.", 4, 7),
-        Post("포스트3","bbb", "post content test", 4, 7),
-        Post("포스트 테스트입니다.","SuperH0ng", "ㅂㄷ제ㅐㅑ겹제ㅐ댜겨베ㅐㄷ쟈겨망ㄴ러;ㅣㄴ아ㅓㄻ;ㅣㄴ아렅크춮,ㅡㅊㅌㅋ푸.,ㅋ틏푸;ㅇㄴ미ㅏ럼ㄴ이;ㅏㅓㄻㅇㄴ;ㅣ라ㅓ", 4, 7),
-        Post("포스트2","aaa", "포스트 본문 테스트입니다.", 4, 7),
-        Post("포스트3","bbb", "post content test", 4, 7))
+    private var postList = mutableListOf<Post>(Post("포스트 테스트입니다.","SuperH0ng", "ㅂㄷ제ㅐㅑ겹제ㅐ댜겨베ㅐㄷ쟈겨망ㄴ러;ㅣㄴ아ㅓㄻ;ㅣㄴ아렅크춮,ㅡㅊㅌㅋ푸.,ㅋ틏푸;ㅇㄴ미ㅏ럼ㄴ이;ㅏㅓㄻㅇㄴ;ㅣ라ㅓ", 4, 7,1),
+        Post("포스트2","aaa", "포스트 본문 테스트입니다.", 4, 7,1),
+        Post("포스트3","bbb", "post content test", 4, 7,1),
+        Post("포스트 테스트입니다.","SuperH0ng", "ㅂㄷ제ㅐㅑ겹제ㅐ댜겨베ㅐㄷ쟈겨망ㄴ러;ㅣㄴ아ㅓㄻ;ㅣㄴ아렅크춮,ㅡㅊㅌㅋ푸.,ㅋ틏푸;ㅇㄴ미ㅏ럼ㄴ이;ㅏㅓㄻㅇㄴ;ㅣ라ㅓ", 4, 7,1),
+        Post("포스트2","aaa", "포스트 본문 테스트입니다.", 4, 7,1),
+        Post("포스트3","bbb", "post content test", 4, 7,1),
+        Post("포스트 테스트입니다.","SuperH0ng", "ㅂㄷ제ㅐㅑ겹제ㅐ댜겨베ㅐㄷ쟈겨망ㄴ러;ㅣㄴ아ㅓㄻ;ㅣㄴ아렅크춮,ㅡㅊㅌㅋ푸.,ㅋ틏푸;ㅇㄴ미ㅏ럼ㄴ이;ㅏㅓㄻㅇㄴ;ㅣ라ㅓ", 4, 7,1),
+        Post("포스트2","aaa", "포스트 본문 테스트입니다.", 4, 7,1),
+        Post("포스트3","bbb", "post content test", 4, 7,1))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -6,6 +6,7 @@ data class Post(
     val content : String,
     val commentCount : Int,
     val likeCount : Int,
+    val postId : Long,
 //    val boardName : String,
 //    val date : String
 )
