@@ -14,7 +14,7 @@
         android:theme="@style/Theme.WithIn_front"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".menu.CalendarActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,8 +23,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".menu.MenuActivity"/>
-        <activity android:name=".menu.CalendarActivity"/>
-        <activity android:name=".LoginActivity"/>
     </application>
 
 </manifest>

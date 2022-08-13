@@ -33,16 +33,16 @@ class MenuActivity : AppCompatActivity() {
     private var dinnerList = mutableListOf<Menu>()
 
     private val menuListMap = mutableMapOf("breakfast" to breakfastList, "lunch" to lunchList, "dinner" to dinnerList)
-    private val containerMap = mutableMapOf("breakfast" to breakfastContainer, "lunch" to lunchContainer, "dinner" to dinnerContainer)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
+        val containerMap = mutableMapOf("breakfast" to breakfastContainer, "lunch" to lunchContainer, "dinner" to dinnerContainer)
         val intent = intent
         val date = intent.getStringExtra("date")
-        getMenu("breakfast", date!!)
-        getMenu("lunch", date)
-        getMenu("dinner", date)
+        getMenu("breakfast", date!!, containerMap)
+        getMenu("lunch", date, containerMap)
+        getMenu("dinner", date, containerMap)
     }
 
     private fun initRecyclerView(MenuContainer : RecyclerView, menuList : MutableList<Menu>){
@@ -52,7 +52,7 @@ class MenuActivity : AppCompatActivity() {
         MenuContainer.adapter = MenuAdapter(this, menuList)
     }
 
-    private fun getMenu(bld : String, date : String){
+    private fun getMenu(bld : String, date : String, containerMap : MutableMap<String, RecyclerView>){
         val getMenuRequest = Request.Builder().addHeader("Content-Type", "application/json").url("http://localhost:8080/menu/$date/$bld").build()
 
         client.newCall(getMenuRequest).enqueue(object: Callback{
