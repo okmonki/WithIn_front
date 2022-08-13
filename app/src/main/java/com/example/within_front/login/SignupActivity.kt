@@ -11,17 +11,19 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.within_front.R
+import com.google.firebase.auth.FirebaseAuth
 
 
 class SignupActivity : AppCompatActivity() {
+
+    private lateinit var auth : FirebaseAuth
+
     private val btnBack : ImageButton by lazy {
         findViewById(R.id.arrowImg)
     }
     private val btnSubmit : androidx.appcompat.widget.AppCompatButton by lazy {
         findViewById(R.id.btn_submit)
     }
-
-
 
     private val editTextEmail : EditText by lazy {
         findViewById(R.id.get_email)
@@ -54,7 +56,6 @@ class SignupActivity : AppCompatActivity() {
     private val warningPasswordReconfirm : TextView by lazy {
         findViewById(R.id.warning_password_reconfirm)
     }
-
 
     // validation
     private var isEmailValid = false
@@ -100,10 +101,10 @@ class SignupActivity : AppCompatActivity() {
         }
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
+        auth=FirebaseAuth.getInstance()
 
         initBackButton()
         focusEditText(editTextEmail)
@@ -150,6 +151,8 @@ class SignupActivity : AppCompatActivity() {
         } else {
             btnSubmit.background = getDrawable(R.drawable.button_basic)
         }
-    }
+        btnSubmit.setOnClickListener(new View.On{
+
+        }
 
 }
