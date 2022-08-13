@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import com.example.within_front.R
 
-class BoardActivity : AppCompatActivity() {
+class WriteANewPostActivity : AppCompatActivity() {
     val backImageView: ImageView by lazy {
         findViewById(R.id.backImageView)
     }
@@ -44,7 +44,13 @@ class BoardActivity : AppCompatActivity() {
             val postData = "{\"title\" : \"${title}\", \"content\" : \"${content}\"}"
 
         }
-
     }
+
+    private fun initBackImageView(){
+        backImageView.setOnClickListener{
+            finish()
+        }
+    }
+
 
     }
