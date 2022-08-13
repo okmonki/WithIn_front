@@ -84,7 +84,7 @@
         />
 
     <TextView
-        android:text="이미 사용 중인 이메일입니다."
+        android:text="유효하지 않은 이메일 형식입니다."
         android:id="@+id/warning_email_invalid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
