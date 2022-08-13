@@ -30,7 +30,7 @@ class MessageBoxAdapter(val mContext: Context, val messageList : MutableList<Mes
                 val message = messageList[curPos]
 
                 val intent = Intent(mContext, MessageChatActivity::class.java)
-                intent.putExtra("partnerId", message.nickname)
+                intent.putExtra("partnerId", message.userId)
 
                 mContext.startActivity(intent)
             }

@@ -58,10 +58,11 @@ class MessageBoxActivity : AppCompatActivity() {
                     for(idx in 0 until jsonArray.length()){
                         val tempMessage = jsonArray[idx] as JSONObject
                         val partner = tempMessage.getString("partnerNickname")
+                        val partnerId = tempMessage.getLong("partnerId")
                         val content = tempMessage.getString("content")
                         val createdAt = tempMessage.getString("createdAt")
 
-                        val message = Message(nickname = partner, content = content, dateTime = createdAt)
+                        val message = Message(nickname = partner, userId = partnerId, content = content, dateTime = createdAt)
                         messageList.add(message)
                     }
                     Log.d("messageList", messageList.size.toString())

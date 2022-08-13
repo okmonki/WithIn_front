@@ -67,11 +67,12 @@ class MessageChatActivity : AppCompatActivity() {
 
                     for(idx in 0 until jsonArray.length()){
                         val tempMessage = jsonArray[idx] as JSONObject
-                        val nickname = tempMessage.getString("userNickname")
+                        val partner = tempMessage.getString("userNickname")
+                        val partnerId = tempMessage.getLong("partnerId")
                         val content = tempMessage.getString("content")
                         val createdAt = tempMessage.getString("createdAt")
 
-                        val message = Message(nickname = nickname, content = content, dateTime = createdAt)
+                        val message = Message(nickname = partner, userId = partnerId, content = content, dateTime = createdAt)
                         messageChatList.add(message)
                     }
                     Log.d("messageChatList", messageChatList.size.toString())
