@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter
 import android.widget.ImageButton
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import com.example.within_front.R
 
 class MyGroupUpdateActivity : AppCompatActivity() {
@@ -16,6 +17,9 @@ class MyGroupUpdateActivity : AppCompatActivity() {
 
     private val backButton : ImageButton by lazy{
         findViewById(R.id.back_button)
+    }
+    private val completeButton : AppCompatButton by lazy{
+        findViewById(R.id.complete_button)
     }
     private val unitSpinner: Spinner by lazy {
         findViewById(R.id.my_unit)
@@ -32,6 +36,7 @@ class MyGroupUpdateActivity : AppCompatActivity() {
         setContentView(R.layout.my_group_update)
 
         initBackButton()
+        initCompleteButton()
 
         val unitAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, unitItems)
         unitSpinner.adapter = unitAdapter
@@ -60,6 +65,11 @@ class MyGroupUpdateActivity : AppCompatActivity() {
     }
     private fun initBackButton(){
         backButton.setOnClickListener{
+            finish()
+        }
+    }
+    private fun initCompleteButton(){
+        completeButton.setOnClickListener{
             finish()
         }
     }
