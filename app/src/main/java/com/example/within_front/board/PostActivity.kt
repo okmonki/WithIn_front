@@ -18,7 +18,16 @@ class PostActivity : AppCompatActivity() {
         findViewById(R.id.comments)
     }
 
-    private var commentList = mutableListOf<Comment>()
+    private var commentList = mutableListOf<Comment>(
+        Comment("SuperH0ng", "안녕하세요", "2022-08-13 | 16:03"),
+        Comment("eunsun", "ㅎ2ㅎ2", "2022-08-13 | 16:05"),
+        Comment("SuperH0ng", "안녕하세요", "2022-08-13 | 16:03"),
+        Comment("eunsun", "ㅎ2ㅎ2", "2022-08-13 | 16:05"),
+        Comment("SuperH0ng", "안녕하세요", "2022-08-13 | 16:03"),
+        Comment("eunsun", "ㅎ2ㅎ2", "2022-08-13 | 16:05"),
+        Comment("SuperH0ng", "안녕하세요", "2022-08-13 | 16:03"),
+        Comment("eunsun", "ㅎ2ㅎ2", "2022-08-13 | 16:05")
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
