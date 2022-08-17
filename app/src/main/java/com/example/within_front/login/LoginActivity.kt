@@ -21,7 +21,8 @@ import androidx.core.widget.addTextChangedListener
 import com.example.within_front.R
 import com.example.within_front.myPage.MyPageActivity
 import com.google.firebase.auth.FirebaseAuth
-import okhttp3.OkHttpClient
+import okhttp3.*
+import java.io.IOException
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -29,6 +30,9 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth : FirebaseAuth
     private val client = OkHttpClient()
+    private val pref by lazy{
+        getSharedPreferences(USER_INFO, MODE_PRIVATE)
+    }
 
     val logoImageView: ImageView by lazy {
         findViewById(R.id.logoImageView)
@@ -139,7 +143,8 @@ class LoginActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        Toast.makeText(this, "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "로그인 되었습니다.", Toast.LENGTH_SHORT).show()
+                        saveUserId(getUid())
                         finish()
                         val intent = Intent(this, MyPageActivity::class.java)
                         startActivity(intent)
@@ -149,6 +154,46 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
         }
+    }
+
+    private fun getUid() : String{
+        return auth.currentUser?.uid ?: ""
+    }
+
+    private fun saveUserId(uid : String){
+        val getUserIdRequest = Request.Builder().url("http:52.78.137.155:8080/user/user/$uid").build()
+
+        client.newCall(getUserIdRequest).enqueue(object : Callback{
+            override fun onFailure(call: Call, e: IOException) {
+                Log.d("fail", "유저 아이디 조회 실패")
+                runOnUiThread{
+                    Toast.makeText(
+                        this@LoginActivity,
+                        "유저 아이디 조회에 실패했습니다. 다시 시도해주세요.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                if(response.code() == 200){
+                    val userId = response.body()!!.string().toLong()
+                    val editor = pref.edit()
+                    editor.putLong("user id", userId)
+                    editor.apply()
+                    Log.d("user id save", userId.toString())
+                } else{
+                    Log.d("fail", "유저 아이디 조회 실패, ${response.code()}")
+                    runOnUiThread{
+                        Toast.makeText(
+                            this@LoginActivity,
+                            "유저 아이디 조회에 실패했습니다. 다시 시도해주세요.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+        })
     }
 
     private fun initEmailAndPasswordEnable() {
@@ -216,9 +261,9 @@ class LoginActivity : AppCompatActivity() {
 //        dialog.show()
 //    }
 
-
-
-
+    companion object{
+        const val USER_INFO = "user info"
+    }
 }
 
 

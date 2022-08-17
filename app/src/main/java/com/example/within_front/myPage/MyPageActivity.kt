@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
@@ -11,6 +12,10 @@ import com.example.within_front.R
 import com.example.within_front.login.LoginActivity
 
 class MyPageActivity : AppCompatActivity() {
+    private val pref by lazy{
+        getSharedPreferences(LoginActivity.USER_INFO, MODE_PRIVATE)
+    }
+
     private val myGroupButton: AppCompatButton by lazy {
         findViewById(R.id.my_group_button)
     }
@@ -28,6 +33,7 @@ class MyPageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.my_page)
 
+        //Log.d("saved user id", pref.getLong("user id", -1).toString())
         initMyGroupButton()
         initMyPostButton()
         initMessageBoxButton()
@@ -79,5 +85,9 @@ class MyPageActivity : AppCompatActivity() {
             finish()
         }
         dlg.show()
+    }
+
+    companion object{
+        const val USER_INFO = "user info"
     }
 }
