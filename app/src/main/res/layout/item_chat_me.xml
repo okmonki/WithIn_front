@@ -18,9 +18,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
         tools:text="Aug 14" />
 
     <androidx.cardview.widget.CardView
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="5dp"
         android:id="@+id/message_card_me"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
