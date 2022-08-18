@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="red">#FF0000</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -7,9 +8,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="backgroundColor">#006FFD</color>
     <color name="fontsColor">#8F9098</color>
-    <color name="Highlight1">#006FFD</color>
+    <color name="Highlight1">#3DF7D3</color>
     <color name="Highlight2">#2897FF</color>
     <color name="Highlight3">#6FBAFF</color>
     <color name="Highlight4">#B4DBFF</color>
