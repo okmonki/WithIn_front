@@ -6,9 +6,12 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import com.example.within_front.LoginActivity
 import com.example.within_front.R
+import com.google.firebase.auth.FirebaseAuth
 import com.example.within_front.login.LoginActivity
 
 class MyPageActivity : AppCompatActivity() {
@@ -28,6 +31,7 @@ class MyPageActivity : AppCompatActivity() {
     private val logoutButton: AppCompatButton by lazy {
         findViewById(R.id.log_out_button)
     }
+    private var auth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,7 +84,13 @@ class MyPageActivity : AppCompatActivity() {
         var btnLogout : AppCompatButton = dlg.findViewById(R.id.logout_button)
         btnLogout.setOnClickListener {
             dlg.dismiss()
+            auth.signOut()
             val intent = Intent(this, LoginActivity::class.java)
+            Toast.makeText(
+                this@MyPageActivity,
+                "로그아웃 되었습니다.",
+                Toast.LENGTH_SHORT
+            ).show()
             startActivity(intent)
             finish()
         }
