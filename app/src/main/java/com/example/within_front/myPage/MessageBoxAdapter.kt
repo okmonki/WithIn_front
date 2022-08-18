@@ -1,6 +1,7 @@
 package com.example.within_front.myPage
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.within_front.R
 
-class MessageAdapter(val mContext: Context, val messageList : MutableList<Message>) : RecyclerView.Adapter<MessageAdapter.CustomViewHolder>() {
+class MessageBoxAdapter(val mContext: Context, val messageList : MutableList<Message>) : RecyclerView.Adapter<MessageBoxAdapter.CustomViewHolder>() {
     class CustomViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         private val nickname = itemView.findViewById<TextView>(R.id.nickname)
         private val content = itemView.findViewById<TextView>(R.id.content)
@@ -24,7 +25,16 @@ class MessageAdapter(val mContext: Context, val messageList : MutableList<Messag
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.message_item, parent, false)
         return CustomViewHolder(view).apply{
+            itemView.setOnClickListener{
+                val curPos = adapterPosition
+                val message = messageList[curPos]
 
+                val intent = Intent(mContext, MessageChatActivity::class.java)
+                intent.putExtra("partnerId", message.userId)
+                intent.putExtra("partnerNickname", message.nickname)
+
+                mContext.startActivity(intent)
+            }
         }
     }
 

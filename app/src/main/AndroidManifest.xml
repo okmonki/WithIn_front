@@ -17,13 +17,15 @@
         android:theme="@style/Theme.WithIn_front"
         tools:targetApi="31">
         <activity
-            android:name=".board.WriteANewPostActivity"
+            android:name=".login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"/>
+        <activity android:android:name=".myPage.MessageChatActivity"/>
         <activity android:name=".login.LoginActivity"/>
         <activity android:name=".login.InterestActivity"/>
         <activity android:name=".myPage.MyPageActivity" />

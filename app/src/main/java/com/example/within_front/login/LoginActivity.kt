@@ -1,6 +1,7 @@
 package com.example.within_front.login
 
 import android.content.Intent
+import android.graphics.Rect
 import android.media.Image
 import android.os.Bundle
 import android.text.Editable
@@ -8,7 +9,9 @@ import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -16,8 +19,10 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import com.example.within_front.R
+import com.example.within_front.myPage.MyPageActivity
 import com.google.firebase.auth.FirebaseAuth
-import okhttp3.OkHttpClient
+import okhttp3.*
+import java.io.IOException
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -25,6 +30,9 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth : FirebaseAuth
     private val client = OkHttpClient()
+    private val pref by lazy{
+        getSharedPreferences(USER_INFO, MODE_PRIVATE)
+    }
 
     val logoImageView: ImageView by lazy {
         findViewById(R.id.logoImageView)
@@ -41,6 +49,10 @@ class LoginActivity : AppCompatActivity() {
 
     val eyeOpenImageButton: ImageButton by lazy {
         findViewById(R.id.eyeOpenImageButton)
+    }
+
+    private val warningText : TextView by lazy{
+        findViewById(R.id.warning)
     }
 
     val loginButton: AppCompatButton by lazy {
@@ -64,7 +76,7 @@ class LoginActivity : AppCompatActivity() {
         setPasswordShowingState()
         checkEmailTextWatcher()
         initLoginButton()
-        //initSignupButton()
+        initSignupButton()
 
     }
 
@@ -123,19 +135,65 @@ class LoginActivity : AppCompatActivity() {
             val password=getInputPassword()
 
             if(!checkEmail()){ //틀린 경우
-                Log.d("test", "fail")
-                Toast.makeText(this,"이메일 형식에 맞게 입력하세요!",Toast.LENGTH_SHORT).show()
+                //Log.d("test", "fail")
+                //Toast.makeText(this,"이메일 형식에 맞게 입력하세요!",Toast.LENGTH_SHORT).show()
+                warningText.visibility = View.VISIBLE
             }
 
             auth.signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
+                        Toast.makeText(this, "로그인 되었습니다.", Toast.LENGTH_SHORT).show()
+                        saveUserId(getUid())
                         finish()
+                        val intent = Intent(this, MyPageActivity::class.java)
+                        startActivity(intent)
                     } else {
-                        Toast.makeText(this,"로그인에 실패하였습니다. 이메일 또는 비밀번호를 확인해주세요.",Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(this,"로그인에 실패하였습니다. 이메일 또는 비밀번호를 확인해주세요.",Toast.LENGTH_SHORT).show()
+                        warningText.visibility = View.VISIBLE
                     }
                 }
         }
+    }
+
+    private fun getUid() : String{
+        return auth.currentUser?.uid ?: ""
+    }
+
+    private fun saveUserId(uid : String){
+        val getUserIdRequest = Request.Builder().url("http:52.78.137.155:8080/user/user/$uid").build()
+
+        client.newCall(getUserIdRequest).enqueue(object : Callback{
+            override fun onFailure(call: Call, e: IOException) {
+                Log.d("fail", "유저 아이디 조회 실패")
+                runOnUiThread{
+                    Toast.makeText(
+                        this@LoginActivity,
+                        "유저 아이디 조회에 실패했습니다. 다시 시도해주세요.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                if(response.code() == 200){
+                    val userId = response.body()!!.string().toLong()
+                    val editor = pref.edit()
+                    editor.putLong("user id", userId)
+                    editor.apply()
+                    Log.d("user id save", userId.toString())
+                } else{
+                    Log.d("fail", "유저 아이디 조회 실패, ${response.code()}")
+                    runOnUiThread{
+                        Toast.makeText(
+                            this@LoginActivity,
+                            "유저 아이디 조회에 실패했습니다. 다시 시도해주세요.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+        })
     }
 
     private fun initEmailAndPasswordEnable() {
@@ -158,32 +216,36 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setPasswordShowingState() {
         eyeCloseImageButton.setOnClickListener {
-            // 비밀번호가 보이지 않는 상태. eye_open
-            if (!isPasswordShowing) {
-                isPasswordShowing = true
-                eyeCloseImageButton.visibility = View.VISIBLE
-                eyeOpenImageButton.visibility = View.GONE
-                passwordEditText.transformationMethod = HideReturnsTransformationMethod.getInstance()
-            } else{
-                isPasswordShowing = false
-                eyeCloseImageButton.visibility = View.GONE
-                eyeOpenImageButton.visibility = View.VISIBLE
-                passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+            eyeCloseImageButton.visibility = View.GONE
+            eyeOpenImageButton.visibility = View.VISIBLE
+            passwordEditText.transformationMethod = HideReturnsTransformationMethod.getInstance()
+        }
+        eyeOpenImageButton.setOnClickListener{
+            eyeOpenImageButton.visibility = View.GONE
+            eyeCloseImageButton.visibility = View.VISIBLE
+            passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+
+        }
+    }
+
+    /**
+     * 현재 포커스된 뷰의 영역이 아닌 다른 곳을 클릭 시 키보드를 내리고 포커스 해제
+     */
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        val focusView = currentFocus
+        if (focusView != null) {
+            val rect = Rect()
+            focusView.getGlobalVisibleRect(rect)
+            val x = ev.x.toInt()
+            val y = ev.y.toInt()
+            if (!rect.contains(x, y)) {
+                val imm: InputMethodManager =
+                    getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                if (imm != null) imm.hideSoftInputFromWindow(focusView.windowToken, 0)
+                focusView.clearFocus()
             }
         }
-        eyeOpenImageButton.setOnClickListener(){
-            if (!isPasswordShowing) {
-                isPasswordShowing = true
-                eyeOpenImageButton.visibility = View.GONE
-                eyeCloseImageButton.visibility = View.VISIBLE
-                passwordEditText.transformationMethod = HideReturnsTransformationMethod.getInstance()
-            }else{
-                isPasswordShowing = false
-                eyeOpenImageButton.visibility = View.VISIBLE
-                eyeCloseImageButton.visibility = View.GONE
-                passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
-            }
-        }
+        return super.dispatchTouchEvent(ev)
     }
 
 //    private fun initAlertDialog() { // 로그인 실패 시 alertDialog 띄워주는 함수
@@ -199,9 +261,9 @@ class LoginActivity : AppCompatActivity() {
 //        dialog.show()
 //    }
 
-
-
-
+    companion object{
+        const val USER_INFO = "user info"
+    }
 }
 
 

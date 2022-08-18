@@ -30,13 +30,13 @@
         tools:text="User" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/message_container"
+        android:id="@+id/message_chat_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginBottom="20dp"
-        app:layout_constraintHeight="true"
-        app:layout_constraintTop_toBottomOf="@id/user_name"
-        app:layout_constraintBottom_toTopOf="@id/input_box" />
+        android:layout_marginTop="12dp"
+        app:layout_constraintBottom_toTopOf="@id/input_box"
+        app:layout_constraintTop_toBottomOf="@id/user_name" />
 
     <EditText
         android:id="@+id/input_box"
@@ -50,9 +50,20 @@
         android:hint="메세지를 입력하세요"
         android:padding="5dp"
         android:paddingStart="15dp"
+        android:singleLine="true"
         app:layout_constraintBottom_toTopOf="@id/navigation_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="3dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="@id/input_box"
+        app:layout_constraintEnd_toEndOf="@id/input_box"
+        app:layout_constraintTop_toTopOf="@id/input_box" />
 
     <include
         android:id="@+id/navigation_bar"
