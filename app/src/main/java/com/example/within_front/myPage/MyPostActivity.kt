@@ -12,7 +12,7 @@ class MyPostActivity : AppCompatActivity() {
         findViewById(R.id.my_post_container)
     }
 
-    private val myPostList = mutableListOf<Post>()
+    private val myPostList = mutableListOf<MyPost>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
