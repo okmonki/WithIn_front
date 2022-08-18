@@ -34,7 +34,8 @@
         android:src="@drawable/board_icon_inactive"
         app:layout_constraintEnd_toEndOf="@id/mypage_icon"
         app:layout_constraintStart_toStartOf="@id/menu_icon"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/Highlight1" />
 
     <TextView
         android:id="@+id/board"
@@ -55,7 +56,7 @@
         android:src="@drawable/mypage_icon_inactive"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/Highlight1" />
+        />
 
     <TextView
         android:id="@+id/mypage"
