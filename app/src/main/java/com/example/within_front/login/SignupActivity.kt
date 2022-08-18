@@ -46,8 +46,6 @@ class SignupActivity : AppCompatActivity() {
     private val eyeOpenPasswordReconfirm: ImageButton by lazy {
         findViewById(R.id.eye_open_2)
     }
-
-
     // editText
     private val editTextEmail : EditText by lazy {
         findViewById(R.id.get_email)
@@ -197,6 +195,8 @@ class SignupActivity : AppCompatActivity() {
         return isPasswordValid
     }
     private fun isSamePassword(reconfirmPassword: String): Boolean {
+
+
         val password = editTextPassword.text.toString()
         isPasswordReconfirm = (password == reconfirmPassword)
         changeVisibility(warningPasswordReconfirm, isPasswordReconfirm)
@@ -295,6 +295,22 @@ class SignupActivity : AppCompatActivity() {
             }
         }
         return super.dispatchTouchEvent(ev)
+    }
+
+    private fun setPasswordShowingState(editText: EditText, show: ImageButton, hide: ImageButton) {
+        show.setOnClickListener {
+            showPassword(hide, show)
+            editText.transformationMethod = HideReturnsTransformationMethod.getInstance()
+        }
+        hide.setOnClickListener {
+            showPassword(show, hide)
+            editText.transformationMethod = PasswordTransformationMethod.getInstance()
+        }
+    }
+
+    private fun showPassword(show: ImageButton, hide: ImageButton) {
+        show.visibility = View.VISIBLE
+        hide.visibility = View.GONE
     }
 
 }
