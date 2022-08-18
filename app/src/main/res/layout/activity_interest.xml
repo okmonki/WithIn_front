@@ -1,312 +1,325 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" >
-<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/backImageView"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="86dp"
-        android:layout_marginStart="16dp"
-        android:src="@drawable/ic_arrow_back_24px_rounded"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/interestTextView0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
-        android:layout_marginStart="49dp"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="당신을 알려주세요!"/>
+        <ImageButton
+            android:id="@+id/back_button"
+            android:background="@android:color/transparent"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_arrow_back_24px_rounded"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/interestTextView0"
+            app:layout_constraintBottom_toBottomOf="@id/interestTextView0"/>
 
-    <TextView
-        android:id="@+id/interestTextView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:layout_marginStart="28dp"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/interestTextView0"
-        android:text="저는"/>
-    
-    <Spinner
-        android:id="@+id/interestSpinner0"
-        android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="12dp"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@id/interestTextView1"
-        app:layout_constraintTop_toBottomOf="@id/interestTextView0"/>
+        <TextView
+            android:id="@+id/interestTextView0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="40dp"
+            android:text="당신을 알려주세요!"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/back_button"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/interestTextView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="166dp"
-        android:layout_marginEnd="28dp"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="소속"/>
+        <TextView
+            android:id="@+id/interestTextView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="48dp"
+            android:text="저는"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/interestTextView0" />
 
-    <Spinner
-        android:id="@+id/interestSpinner1"
-        android:layout_width="116dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
-        android:layout_marginStart="28dp"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/interestTextView0"
-        android:text="저는"/>
+        <Spinner
+            android:id="@+id/interestSpinner0"
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="0dp"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintTop_toTopOf="@id/interestTextView1"
+            app:layout_constraintBottom_toBottomOf="@id/interestTextView1"
+            app:layout_constraintStart_toEndOf="@id/interestTextView1"
+            app:layout_constraintTop_toBottomOf="@id/interestTextView0" />
 
-    <TextView
-        android:id="@+id/interestTextView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="33dp"
-        android:layout_marginStart="12dp"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@id/interestSpinner1"
-        app:layout_constraintTop_toBottomOf="@id/interestSpinner0"
-        android:text="입니다."/>
+        <TextView
+            android:id="@+id/interestTextView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="28dp"
+            android:text="소속"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@id/interestSpinner0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/interestSpinner0"
+            app:layout_constraintTop_toTopOf="@id/interestSpinner0" />
 
-    <TextView
-        android:id="@+id/interestTextView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="98dp"
-        android:layout_marginStart="28dp"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/interestSpinner0"
-        android:text="제 MBTI는"/>
+        <Spinner
+            android:id="@+id/interestSpinner1"
+            android:layout_width="156dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="112dp"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/interestTextView0" />
 
-    <Spinner
-        android:id="@+id/interestSpinner2"
-        android:layout_width="116dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
-        android:layout_marginStart="12dp"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@id/interestTextView4"
-        app:layout_constraintTop_toBottomOf="@id/interestSpinner0" />
+        <TextView
+            android:id="@+id/interestTextView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="0dp"
+            android:text="입니다."
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@id/interestSpinner1"
+            app:layout_constraintStart_toEndOf="@id/interestSpinner1"
+            app:layout_constraintTop_toBottomOf="@id/interestSpinner0"
+            app:layout_constraintTop_toTopOf="@id/interestSpinner1" />
 
-    <TextView
-        android:id="@+id/interestTextView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="276dp"
-        android:layout_marginEnd="28dp"
-        android:text="이고"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/interestTextView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="98dp"
+            android:text="제 MBTI는"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/interestSpinner0" />
 
-    <TextView
-        android:id="@+id/interestTextView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="28dp"
-        android:text="제 취미는"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/interestTextView4" />
+        <Spinner
+            android:id="@+id/interestSpinner2"
+            android:layout_width="116dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="0dp"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@id/interestTextView4"
+            app:layout_constraintTop_toTopOf="@id/interestTextView4"
+            app:layout_constraintStart_toEndOf="@id/interestTextView4"
+            app:layout_constraintTop_toBottomOf="@id/interestSpinner0" />
 
-    <CheckBox
-        android:id="@+id/checkBox0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="86dp"
-        android:layout_marginStart="28dp"
-        android:text="축구"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/interestTextView4" />
+        <TextView
+            android:id="@+id/interestTextView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="28dp"
+            android:text="이고"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@id/interestSpinner2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/interestSpinner2"
+            app:layout_constraintTop_toTopOf="@id/interestSpinner2" />
 
-    <CheckBox
-        android:id="@+id/checkBox1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="86dp"
-        android:layout_marginStart="32dp"
-        android:text="농구"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@id/checkBox0"
-        app:layout_constraintTop_toBottomOf="@id/interestTextView4" />
+        <TextView
+            android:id="@+id/interestTextView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="32dp"
+            android:text="제 취미는"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/interestTextView4" />
 
-    <CheckBox
-        android:id="@+id/checkBox2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="86dp"
-        android:layout_marginStart="32dp"
-        android:text="야구"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@id/checkBox1"
-        app:layout_constraintTop_toBottomOf="@id/interestTextView4" />
+        <CheckBox
+            android:id="@+id/checkBox0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="86dp"
+            android:text="축구"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/interestTextView4" />
 
-    <CheckBox
-        android:id="@+id/checkBox3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:layout_marginStart="28dp"
-        android:text="헬스"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/checkBox0" />
+        <CheckBox
+            android:id="@+id/checkBox1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="86dp"
+            android:text="농구"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@id/checkBox0"
+            app:layout_constraintTop_toBottomOf="@id/interestTextView4" />
 
-    <CheckBox
-        android:id="@+id/checkBox4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:layout_marginStart="32dp"
-        android:text="뜀걸음"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@id/checkBox3"
-        app:layout_constraintTop_toBottomOf="@id/checkBox1" />
+        <CheckBox
+            android:id="@+id/checkBox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="86dp"
+            android:text="야구"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@id/checkBox1"
+            app:layout_constraintTop_toBottomOf="@id/interestTextView4" />
 
-    <CheckBox
-        android:id="@+id/checkBox5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:layout_marginStart="13dp"
-        android:text="노래"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@id/checkBox4"
-        app:layout_constraintTop_toBottomOf="@id/checkBox2" />
+        <CheckBox
+            android:id="@+id/checkBox3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="0dp"
+            android:text="헬스"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/checkBox0" />
 
-    <CheckBox
-        android:id="@+id/checkBox6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:layout_marginStart="28dp"
-        android:text="게임"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/checkBox3" />
+        <CheckBox
+            android:id="@+id/checkBox4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="0dp"
+            android:text="뜀걸음"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@id/checkBox3"
+            app:layout_constraintTop_toBottomOf="@id/checkBox1" />
 
-    <CheckBox
-        android:id="@+id/checkBox7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:layout_marginStart="32dp"
-        android:text="영화"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@id/checkBox6"
-        app:layout_constraintTop_toBottomOf="@id/checkBox4" />
+        <CheckBox
+            android:id="@+id/checkBox5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="0dp"
+            android:text="노래"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@id/checkBox4"
+            app:layout_constraintTop_toBottomOf="@id/checkBox2" />
 
-    <CheckBox
-        android:id="@+id/checkBox8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:layout_marginStart="32dp"
-        android:text="드라마"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@id/checkBox7"
-        app:layout_constraintTop_toBottomOf="@id/checkBox5" />
+        <CheckBox
+            android:id="@+id/checkBox6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="0dp"
+            android:text="게임"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/checkBox3" />
 
-    <CheckBox
-        android:id="@+id/checkBox9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:layout_marginStart="28dp"
-        android:text="만화"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/checkBox6" />
+        <CheckBox
+            android:id="@+id/checkBox7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="0dp"
+            android:text="영화"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@id/checkBox6"
+            app:layout_constraintTop_toBottomOf="@id/checkBox4" />
 
-    <CheckBox
-        android:id="@+id/checkBox10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:layout_marginStart="32dp"
-        android:text="요리"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@id/checkBox9"
-        app:layout_constraintTop_toBottomOf="@id/checkBox7" />
+        <CheckBox
+            android:id="@+id/checkBox8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="0dp"
+            android:text="드라마"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@id/checkBox7"
+            app:layout_constraintTop_toBottomOf="@id/checkBox5" />
 
-    <CheckBox
-        android:id="@+id/checkBox11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:layout_marginStart="32dp"
-        android:text="독서"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@id/checkBox10"
-        app:layout_constraintTop_toBottomOf="@id/checkBox8" />
+        <CheckBox
+            android:id="@+id/checkBox9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="0dp"
+            android:text="만화"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/checkBox6" />
 
-    <TextView
-        android:id="@+id/interestTextView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="28dp"
-        android:text="입니다."
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/checkBox11" />
+        <CheckBox
+            android:id="@+id/checkBox10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="0dp"
+            android:text="요리"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@id/checkBox9"
+            app:layout_constraintTop_toBottomOf="@id/checkBox7" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/interestCompleteButton"
-        android:layout_width="328dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:text="완료"
-        android:textColor="@color/white"
-        android:background="@color/backgroundColor"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/interestTextView7" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <CheckBox
+            android:id="@+id/checkBox11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="0dp"
+            android:text="독서"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@id/checkBox10"
+            app:layout_constraintTop_toBottomOf="@id/checkBox8" />
+
+        <TextView
+            android:id="@+id/interestTextView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="28dp"
+            android:text="입니다."
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/checkBox11" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/interestCompleteButton"
+            android:layout_width="328dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/button_rounded_corner_rectangle"
+            android:text="완료"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/interestTextView7" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

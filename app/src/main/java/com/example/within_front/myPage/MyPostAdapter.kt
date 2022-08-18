@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.within_front.R
 
-class MyPostAdapter(val mContext: Context, val myPostList : MutableList<Post>) : RecyclerView.Adapter<MyPostAdapter.CustomViewHolder>() {
+class MyPostAdapter(val mContext: Context, val myPostList : MutableList<MyPost>) : RecyclerView.Adapter<MyPostAdapter.CustomViewHolder>() {
 
     class CustomViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         private val nickname = itemView.findViewById<TextView>(R.id.nickname)
@@ -16,7 +16,7 @@ class MyPostAdapter(val mContext: Context, val myPostList : MutableList<Post>) :
         private val boardName = itemView.findViewById<TextView>(R.id.board_name)
         private val date = itemView.findViewById<TextView>(R.id.date)
 
-        fun bind(myPost : Post){
+        fun bind(myPost : MyPost){
             nickname.text = myPost.nickname
             content.text = myPost.content
             boardName.text = myPost.boardName
@@ -27,7 +27,6 @@ class MyPostAdapter(val mContext: Context, val myPostList : MutableList<Post>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.my_post_item, parent, false)
         return CustomViewHolder(view).apply{
-
         }
     }
 

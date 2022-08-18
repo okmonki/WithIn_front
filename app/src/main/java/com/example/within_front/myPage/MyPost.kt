@@ -1,6 +1,6 @@
 package com.example.within_front.myPage
 
-data class Post(
+data class MyPost(
     val nickname : String,
     val content : String,
     val boardName : String,
