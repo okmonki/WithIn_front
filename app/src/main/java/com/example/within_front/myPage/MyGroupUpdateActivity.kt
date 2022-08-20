@@ -5,14 +5,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import com.example.within_front.R
 import com.example.within_front.base.BaseActivity
-import com.example.within_front.menu.modifyMonth
 import okhttp3.*
 import java.io.IOException
-import java.util.*
 import kotlin.collections.ArrayList
 
 class MyGroupUpdateActivity : BaseActivity() {
@@ -21,6 +18,7 @@ class MyGroupUpdateActivity : BaseActivity() {
     private var position : String = ""
     private var mbti : String = ""
     private var hobby : String = ""
+    private var hobbyList = listOf<String>()
 
     private var unitItems = arrayOf("미사일 사령부", "소속 부대 2", "소속 부대 3")
     private var positionItems = arrayOf("운전병", "행정병", "통신병", "의무병")
@@ -120,6 +118,35 @@ class MyGroupUpdateActivity : BaseActivity() {
         unitSpinner.setSelection(unitItems.indexOf(unit))
         positionSpinner.setSelection(positionItems.indexOf(position))
         mbtiSpinner.setSelection(mbtiItems.indexOf(mbti))
+
+        hobbyList = hobby.split("\n")
+        if (hobby1CheckBox.text in hobbyList) {
+            hobby1CheckBox.isChecked = true
+        }
+        if (hobby2CheckBox.text in hobbyList) {
+            hobby2CheckBox.isChecked = true
+        }
+        if (hobby3CheckBox.text in hobbyList) {
+            hobby3CheckBox.isChecked = true
+        }
+        if (hobby4CheckBox.text in hobbyList) {
+            hobby4CheckBox.isChecked = true
+        }
+        if (hobby5CheckBox.text in hobbyList) {
+            hobby5CheckBox.isChecked = true
+        }
+        if (hobby6CheckBox.text in hobbyList) {
+            hobby6CheckBox.isChecked = true
+        }
+        if (hobby7CheckBox.text in hobbyList) {
+            hobby7CheckBox.isChecked = true
+        }
+        if (hobby8CheckBox.text in hobbyList) {
+            hobby8CheckBox.isChecked = true
+        }
+        if (hobby9CheckBox.text in hobbyList) {
+            hobby9CheckBox.isChecked = true
+        }
 
         initNavigation("myPage")
     }
