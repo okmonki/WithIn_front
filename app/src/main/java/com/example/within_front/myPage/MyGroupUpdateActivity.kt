@@ -9,11 +9,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import com.example.within_front.R
 import com.example.within_front.base.BaseActivity
+import com.example.within_front.menu.modifyMonth
 import okhttp3.*
 import java.io.IOException
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MyGroupUpdateActivity : BaseActivity() {
     private val client = OkHttpClient()
+    private var unit : String = ""
+    private var position : String = ""
+    private var mbti : String = ""
+    private var hobby : String = ""
 
     private var unitItems = arrayOf("미사일 사령부", "소속 부대 2", "소속 부대 3")
     private var positionItems = arrayOf("운전병", "행정병", "통신병", "의무병")
@@ -94,6 +101,25 @@ class MyGroupUpdateActivity : BaseActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
             }
         }
+        if (intent.hasExtra("unit")) {
+            unit = intent.getStringExtra("unit").toString()
+            Log.d("데이터 가져오기", unit)
+        }
+        if (intent.hasExtra("position")) {
+            position = intent.getStringExtra("position").toString()
+            Log.d("데이터 가져오기", position)
+        }
+        if (intent.hasExtra("mbti")) {
+            mbti = intent.getStringExtra("mbti").toString()
+            Log.d("데이터 가져오기", mbti)
+        }
+        if (intent.hasExtra("hobby")) {
+            hobby = intent.getStringExtra("hobby").toString()
+            Log.d("데이터 가져오기", hobby)
+        }
+        unitSpinner.setSelection(unitItems.indexOf(unit))
+        positionSpinner.setSelection(positionItems.indexOf(position))
+        mbtiSpinner.setSelection(mbtiItems.indexOf(mbti))
 
         initNavigation("myPage")
     }
@@ -139,7 +165,6 @@ class MyGroupUpdateActivity : BaseActivity() {
             if(hobby9CheckBox.isChecked()) {
                 hobbyList.add("\"${hobby9CheckBox.text}\"")
             }
-
             val postData = "{\"army\": \"${unitSpinner.selectedItem}\", \"position\": \"${positionSpinner.selectedItem}\", \"mbti\": \"${mbtiSpinner.selectedItem}\", \"categories\": $hobbyList}"
             Log.d("category", "$hobbyList")
             Log.d("unitSpinner", unitSpinner.selectedItem.toString())
