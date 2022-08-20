@@ -8,10 +8,11 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import com.example.within_front.R
+import com.example.within_front.base.BaseActivity
 import okhttp3.*
 import java.io.IOException
 
-class MyGroupUpdateActivity : AppCompatActivity() {
+class MyGroupUpdateActivity : BaseActivity() {
     private val client = OkHttpClient()
 
     private var unitItems = arrayOf("미사일 사령부", "소속 부대 2", "소속 부대 3")
@@ -93,10 +94,14 @@ class MyGroupUpdateActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
             }
         }
+
+        initNavigation("myPage")
     }
     private fun initBackButton(){
         backButton.setOnClickListener{
+            val intent = Intent(this@MyGroupUpdateActivity, MyGroupReadActivity::class.java)
             finish()
+            startActivity(intent)
         }
     }
     private fun initCompleteButton(userId : Long){
@@ -108,31 +113,31 @@ class MyGroupUpdateActivity : AppCompatActivity() {
             var hobbyList =  ArrayList<String>()
 
             if(hobby1CheckBox.isChecked()) {
-                hobbyList.add("\"${hobby1CheckBox.text.toString()}\"")
+                hobbyList.add("\"${hobby1CheckBox.text}\"")
             }
             if(hobby2CheckBox.isChecked()) {
-                hobbyList.add("\"${hobby2CheckBox.text.toString()}\"")
+                hobbyList.add("\"${hobby2CheckBox.text}\"")
             }
             if(hobby3CheckBox.isChecked()) {
-                hobbyList.add("\"${hobby3CheckBox.text.toString()}\"")
+                hobbyList.add("\"${hobby3CheckBox.text}\"")
             }
             if(hobby4CheckBox.isChecked()) {
-                hobbyList.add("\"${hobby4CheckBox.text.toString()}\"")
+                hobbyList.add("\"${hobby4CheckBox.text}\"")
             }
             if(hobby5CheckBox.isChecked()) {
-                hobbyList.add("\"${hobby5CheckBox.text.toString()}\"")
+                hobbyList.add("\"${hobby5CheckBox.text}\"")
             }
             if(hobby6CheckBox.isChecked()) {
-                hobbyList.add("\"${hobby6CheckBox.text.toString()}\"")
+                hobbyList.add("\"${hobby6CheckBox.text}\"")
             }
             if(hobby7CheckBox.isChecked()) {
-                hobbyList.add("\"${hobby7CheckBox.text.toString()}\"")
+                hobbyList.add("\"${hobby7CheckBox.text}\"")
             }
             if(hobby8CheckBox.isChecked()) {
-                hobbyList.add("\"${hobby8CheckBox.text.toString()}\"")
+                hobbyList.add("\"${hobby8CheckBox.text}\"")
             }
             if(hobby9CheckBox.isChecked()) {
-                hobbyList.add("\"${hobby9CheckBox.text.toString()}\"")
+                hobbyList.add("\"${hobby9CheckBox.text}\"")
             }
 
             val postData = "{\"army\": \"${unitSpinner.selectedItem}\", \"position\": \"${positionSpinner.selectedItem}\", \"mbti\": \"${mbtiSpinner.selectedItem}\", \"categories\": $hobbyList}"
@@ -158,16 +163,10 @@ class MyGroupUpdateActivity : AppCompatActivity() {
                 }
                 override fun onResponse(call: Call, response: Response) {
                     if(response.code() == 200) {
-                        Log.d("group", "success")
-                        runOnUiThread{
-                            Toast.makeText(
-                                this@MyGroupUpdateActivity,
-                                "저장 완료",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            val intent = Intent(this@MyGroupUpdateActivity, MyGroupReadActivity::class.java)
-                            startActivity(intent)
-                        }
+                        Log.d("update group", "success")
+                        val intent = Intent(this@MyGroupUpdateActivity, MyGroupReadActivity::class.java)
+                        finish()
+                        startActivity(intent)
                     }
                     else {
                         Log.d("connection error", "userId : $userId / response code : ${response.code()} / 인터넷 연결 불안정")

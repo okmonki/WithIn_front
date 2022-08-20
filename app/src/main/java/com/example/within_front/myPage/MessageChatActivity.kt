@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.within_front.R
+import com.example.within_front.base.BaseActivity
 import com.example.within_front.myPage.Message
 import com.example.within_front.myPage.MessageBoxAdapter
 import okhttp3.*
@@ -20,7 +21,7 @@ import java.io.IOException
 import java.lang.Thread.sleep
 import java.time.LocalDateTime
 
-class MessageChatActivity : AppCompatActivity() {
+class MessageChatActivity : BaseActivity() {
 
     val client = OkHttpClient()
 
@@ -66,6 +67,8 @@ class MessageChatActivity : AppCompatActivity() {
         //initInputBox()
         initSubmitButton(1, 2) // TODO
         getMessageChat(1, 2) // TODO
+
+        initNavigation("myPage")
     }
 
     private fun initUserName(name : String){

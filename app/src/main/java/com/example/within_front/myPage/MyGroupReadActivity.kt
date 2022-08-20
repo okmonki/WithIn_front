@@ -8,15 +8,15 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.within_front.R
+import com.example.within_front.base.BaseActivity
 import okhttp3.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 
-class MyGroupReadActivity : AppCompatActivity() {
+class MyGroupReadActivity : BaseActivity() {
 
     private val client = OkHttpClient()
-    private var groupList = mutableListOf<Group>()
     private var hobbyList = mutableListOf<Hobby>()
 
     private val backButton : ImageButton by lazy{
@@ -45,6 +45,8 @@ class MyGroupReadActivity : AppCompatActivity() {
         initBackButton()
         initCreateButton()
         getMyGroup(1)
+
+        initNavigation("myPage")
     }
 
     private fun initBackButton(){
@@ -75,7 +77,6 @@ class MyGroupReadActivity : AppCompatActivity() {
             }
             override fun onResponse(call: Call, response: Response) {
                 if(response.code() == 200) {
-                    groupList = mutableListOf()
                     hobbyList = mutableListOf()
 
                     val jsonArray = JSONArray(response.body()!!.string())
@@ -83,25 +84,22 @@ class MyGroupReadActivity : AppCompatActivity() {
                     for(idx in 0 until jsonArray.length()){
                         val tempGroup = jsonArray[idx] as JSONObject
                         val category = tempGroup.getString("category")
-                        val army = tempGroup.getString("army")
-                        val position = tempGroup.getString("position")
-                        val mbti = tempGroup.getString("mbti")
-
-                        val group = Group(army = army, position = position, mbti = mbti)
-                        groupList.add(group)
-                        val hobby = Hobby(category = category)
-                        hobbyList.add(hobby)
+                        val describe = tempGroup.getString("describe")
+                        hobbyList.add(Hobby(category = category, describe = describe))
                     }
-                    Log.d("groupList", groupList.size.toString())
                     runOnUiThread{
-                        for (item in groupList) {
-                            unitText.text = "${item.army}"
-                            positionText.text = "${item.position}"
-                            mbtiText.text = "${item.mbti}"
-                        }
+
                         for (item in hobbyList) {
-                            hobbyText.append("${item.category}")
-                            hobbyText.append("\n")
+                            val category = item.category
+                            when(item.describe){
+                                "hobby" -> {
+                                    hobbyText.append(category)
+                                    hobbyText.append("\n")
+                                }
+                                "army" -> unitText.text = category
+                                "position" -> positionText.text = category
+                                "mbti" -> mbtiText.text = category
+                            }
                         }
                     }
                 }

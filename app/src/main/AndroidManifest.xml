@@ -25,15 +25,20 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"/>
-        <activity android:name=".myPage.MessageChatActivity"/>
+        <activity android:name=".board.BelongActivity"/>
+        <activity android:name=".board.BoardActivity"/>
+        <activity android:name=".board.PostActivity"/>
+        <activity android:name=".board.WriteANewPostActivity"/>
         <activity android:name=".login.SignupActivity"/>
         <activity android:name=".login.InterestActivity"/>
+        <activity android:name=".menu.MenuActivity"/>
+        <activity android:name=".menu.CalendarActivity"/>
+        <activity android:name=".myPage.MessageBoxActivity"/>
+        <activity android:name=".myPage.MessageChatActivity"/>
         <activity android:name=".myPage.MyPageActivity" />
         <activity android:name=".myPage.MyGroupReadActivity" />
         <activity android:name=".myPage.MyGroupUpdateActivity" />
-        <activity android:name=".menu.MenuActivity"/>
-        <activity android:name=".menu.CalendarActivity"/>
-        <activity android:name=".login.SignupActivity"/>
+        <activity android:name=".myPage.MyPostActivity"/>
     </application>
 
 </manifest>

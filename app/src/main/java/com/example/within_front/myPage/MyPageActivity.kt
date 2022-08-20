@@ -11,9 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import com.example.within_front.login.LoginActivity
 import com.example.within_front.R
+import com.example.within_front.base.BaseActivity
 import com.google.firebase.auth.FirebaseAuth
 
-class MyPageActivity : AppCompatActivity() {
+class MyPageActivity : BaseActivity() {
     private val pref by lazy{
         getSharedPreferences(USER_INFO, MODE_PRIVATE)
     }
@@ -41,6 +42,8 @@ class MyPageActivity : AppCompatActivity() {
         initMyPostButton()
         initMessageBoxButton()
         initLogoutButton()
+
+        initNavigation("myPage")
     }
 
     private fun initMyGroupButton() {
@@ -84,6 +87,12 @@ class MyPageActivity : AppCompatActivity() {
         btnLogout.setOnClickListener {
             dlg.dismiss()
             auth.signOut()
+
+            val editor = pref.edit()
+            editor.remove("user id").apply()
+
+            //Log.d("preference clear test", pref.getLong("user id", -1).toString())
+
             val intent = Intent(this, LoginActivity::class.java)
             Toast.makeText(
                 this@MyPageActivity,

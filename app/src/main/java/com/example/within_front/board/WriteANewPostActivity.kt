@@ -9,10 +9,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import com.example.within_front.R
+import com.example.within_front.base.BaseActivity
 import okhttp3.*
 import java.io.IOException
 
-class WriteANewPostActivity : AppCompatActivity() {
+class WriteANewPostActivity : BaseActivity() {
 
     val client = OkHttpClient()
 
@@ -36,6 +37,8 @@ class WriteANewPostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_post)
         initCompleteButton(initView())
+
+        initNavigation("board")
     }
 
     private fun getInputTitle() : String {

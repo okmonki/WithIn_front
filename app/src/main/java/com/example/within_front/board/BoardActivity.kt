@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.within_front.board.PostAdapter
 import com.example.within_front.R
+import com.example.within_front.base.BaseActivity
 import com.example.within_front.login.SignupActivity
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
@@ -19,7 +20,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 
-class BoardActivity : AppCompatActivity() {
+class BoardActivity : BaseActivity() {
 
     val client = OkHttpClient()
 
@@ -52,6 +53,8 @@ class BoardActivity : AppCompatActivity() {
         initRecyclerView()
         initBackImageButton()
         initPencilImageButton(initView())
+
+        initNavigation("board")
     }
 
     private fun initRecyclerView(){

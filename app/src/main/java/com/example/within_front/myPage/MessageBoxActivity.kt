@@ -2,19 +2,25 @@ package com.example.within_front.myPage
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.within_front.R
+import com.example.within_front.base.BaseActivity
 import okhttp3.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 
-class MessageBoxActivity : AppCompatActivity() {
+class MessageBoxActivity : BaseActivity() {
 
     private val client = OkHttpClient()
+
+    private val backButton : ImageButton by lazy{
+        findViewById(R.id.back_button)
+    }
 
     private val messageBoxContainer : RecyclerView by lazy{
         findViewById(R.id.messagebox_container)
@@ -24,8 +30,17 @@ class MessageBoxActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_mypost)
+        setContentView(R.layout.activity_messagebox)
         // TODO getMyMessages(userId)
+
+        initBackButton()
+        initNavigation("myPage")
+    }
+
+    private fun initBackButton(){
+        backButton.setOnClickListener {
+            finish()
+        }
     }
 
     private fun initRecyclerView(){

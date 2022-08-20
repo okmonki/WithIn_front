@@ -5,12 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.within_front.R
+import com.example.within_front.base.BaseActivity
 //import okhttp3.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 
-class PostActivity : AppCompatActivity() {
+class PostActivity : BaseActivity() {
 
 //    private val client = OkHttpClient()
 
@@ -33,6 +34,8 @@ class PostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post)
         initRecyclerView()
+
+        initNavigation("board")
     }
     private fun initRecyclerView(){
         commentContainer.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)

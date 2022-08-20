@@ -1,20 +1,27 @@
 package com.example.within_front.myPage
 
+import android.media.Image
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.within_front.R
+import com.example.within_front.base.BaseActivity
 import okhttp3.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 
-class MyPostActivity : AppCompatActivity() {
+class MyPostActivity : BaseActivity() {
 
     val client = OkHttpClient()
+
+    private val backButton : ImageButton by lazy{
+        findViewById(R.id.back_button)
+    }
 
     private val myPostContainer : RecyclerView by lazy{
         findViewById(R.id.my_post_container)
@@ -26,6 +33,15 @@ class MyPostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mypost)
         // TODO getMyPost(userId)
+
+        initBackButton()
+        initNavigation("myPage")
+    }
+
+    private fun initBackButton(){
+        backButton.setOnClickListener {
+            finish()
+        }
     }
 
     private fun initRecyclerView(){
