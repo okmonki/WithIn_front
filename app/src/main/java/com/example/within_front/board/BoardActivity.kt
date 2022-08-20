@@ -54,7 +54,6 @@ class BoardActivity : BaseActivity() {
         }
         getPost(boardId)
         setBoardName(boardId)
-        initRecyclerView()
         initBackImageButton()
         initPencilImageButton(initView())
 

@@ -35,8 +35,6 @@ class BelongActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_belong)
-        initRecyclerView()
-
         setUnit(userId)
         getBoard(userId)
 
@@ -50,7 +48,7 @@ class BelongActivity : BaseActivity() {
 
 
     private fun getBoard(userId : Long){
-        val getBoardRequest = Request.Builder().addHeader("Content-Type", "application/json").url("http:52.78.137.155:8080/user/$userId/myGroup").build()
+        val getBoardRequest = Request.Builder().addHeader("Content-Type", "application/json").url("http:52.78.137.155:8080/post/$userId/boards").build()
 
         client.newCall(getBoardRequest).enqueue(object: Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -72,12 +70,11 @@ class BelongActivity : BaseActivity() {
                     for(idx in 0 until jsonArray.length()){
                         val tempBoard = jsonArray[idx] as JSONObject
                         val boardName = tempBoard.getString("category")
-                        val boardExplanation = tempBoard.getString("boardExplanation")
+                        val boardExplanation = tempBoard.getString("explanation")
                         val boardId = tempBoard.getLong("boardId")
                         val board = Board(boardName, boardExplanation, boardId)
                         boardList.add(board)
                     }
-//                    belong.text = army.plus(" 게시판")
 
                     Log.d("boardList", boardList.size.toString())
                     runOnUiThread{

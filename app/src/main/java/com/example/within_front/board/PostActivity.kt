@@ -53,6 +53,9 @@ class PostActivity : BaseActivity() {
     private val getComment : EditText by lazy {
         findViewById(R.id.get_comment)
     }
+    private val backImageButton : ImageButton by lazy {
+        findViewById(R.id.arrowImg)
+    }
 
 
 
@@ -90,7 +93,7 @@ class PostActivity : BaseActivity() {
         Log.d("test", "test")
         initWriteCommentButton(postId)
         initLikeButton(postId)
-
+        initBackImageButton()
         initNavigation("board")
     }
 
@@ -187,7 +190,7 @@ class PostActivity : BaseActivity() {
                         runOnUiThread{
                             Toast.makeText(
                                 this@PostActivity,
-                                "댓글 작성세 실패하였습니다. 다시 시도해주세요.",
+                                "댓글 작성에 실패하였습니다. 다시 시도해주세요.",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -208,6 +211,14 @@ class PostActivity : BaseActivity() {
                         }
                     }
                 })
+            } else {
+                runOnUiThread{
+                    Toast.makeText(
+                        this@PostActivity,
+                        "댓글을 입력해 주세요.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }
@@ -235,7 +246,6 @@ class PostActivity : BaseActivity() {
                         if (response.body()!!.string().toBoolean()) {
                             likeBtn.setImageResource(R.drawable.heart_empty)
                             val likesRequest = Request.Builder().url("http:52.78.137.155:8080/post/boards/$postId/unlikes?userId=$userId").build()
-
 
                             client.newCall(likesRequest).enqueue(object: Callback {
                                 override fun onFailure(call: Call, e: IOException) {
@@ -281,6 +291,12 @@ class PostActivity : BaseActivity() {
                     }
                 }
             })
+        }
+    }
+
+    private fun initBackImageButton(){
+        backImageButton.setOnClickListener{
+            finish()
         }
     }
 
