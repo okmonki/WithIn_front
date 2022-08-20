@@ -226,7 +226,7 @@ class PostActivity : BaseActivity() {
 
     private fun initLikeButton(postId: Long){
         likeBtn.setOnClickListener {
-            val getIsLikedRequest = Request.Builder().url("http:52.78.137.155:8080/post/board/${postId}/isLiked?userId=$userId").build()
+            val getIsLikedRequest = Request.Builder().url("http:52.78.137.155:8080/post/boards/${postId}/isLiked?userId=$userId").build()
 
             client.newCall(getIsLikedRequest).enqueue(object: Callback {
                 override fun onFailure(call: Call, e: IOException) {
@@ -301,7 +301,7 @@ class PostActivity : BaseActivity() {
     }
 
     private fun setHeart(postId : Long) {
-        val getIsLikedRequest = Request.Builder().url("http:52.78.137.155:8080/post/board/${postId}/isLiked?userId=$userId").build()
+        val getIsLikedRequest = Request.Builder().url("http:52.78.137.155:8080/post/boards/${postId}/isLiked?userId=$userId").build()
 
         client.newCall(getIsLikedRequest).enqueue(object: Callback {
             override fun onFailure(call: Call, e: IOException) {

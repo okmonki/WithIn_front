@@ -29,15 +29,17 @@ class BelongActivity : BaseActivity() {
     private var boardList = mutableListOf<Board>()
 
 
-    private val pref = getSharedPreferences(PostActivity.USER_INFO, MODE_PRIVATE)
-    private val userId = pref.getLong("user id", -1)
+    private val pref by lazy{
+        getSharedPreferences(PostActivity.USER_INFO, MODE_PRIVATE)
+    }
+    private var userId = 1L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_belong)
+        pref.getLong("user id", -1)
         setUnit(userId)
         getBoard(userId)
-
         initNavigation("board")
     }
     private fun initRecyclerView(){
@@ -49,7 +51,6 @@ class BelongActivity : BaseActivity() {
 
     private fun getBoard(userId : Long){
         val getBoardRequest = Request.Builder().addHeader("Content-Type", "application/json").url("http:52.78.137.155:8080/post/$userId/boards").build()
-
         client.newCall(getBoardRequest).enqueue(object: Callback {
             override fun onFailure(call: Call, e: IOException) {
                 Log.d("fail", "게시판 조회 실패")
@@ -63,10 +64,11 @@ class BelongActivity : BaseActivity() {
             }
 
             override fun onResponse(call: Call, response: Response) {
+                Log.d("good?", response.code().toString())
+                Log.d("userId", userId.toString())
                 if(response.code() == 200){
                     boardList = mutableListOf()
                     val jsonArray = JSONArray(response.body()!!.string())
-
                     for(idx in 0 until jsonArray.length()){
                         val tempBoard = jsonArray[idx] as JSONObject
                         val boardName = tempBoard.getString("category")
