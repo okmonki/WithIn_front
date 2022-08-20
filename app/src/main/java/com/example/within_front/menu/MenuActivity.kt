@@ -68,6 +68,7 @@ class MenuActivity : BaseActivity() {
     private fun initBackButton(){
         backButton.setOnClickListener {
             val intent = Intent(this, CalendarActivity::class.java)
+            finish()
             startActivity(intent)
         }
     }

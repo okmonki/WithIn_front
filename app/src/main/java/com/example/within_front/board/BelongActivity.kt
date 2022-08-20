@@ -29,14 +29,16 @@ class BelongActivity : BaseActivity() {
     private var boardList = mutableListOf<Board>()
 
 
-    private val pref = getSharedPreferences(PostActivity.USER_INFO, MODE_PRIVATE)
-    private val userId = pref.getLong("user id", -1)
+    private val pref by lazy{
+        getSharedPreferences(PostActivity.USER_INFO, MODE_PRIVATE)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_belong)
         initRecyclerView()
 
+        val userId = pref.getLong("user id", -1)
         setUnit(userId)
         getBoard(userId)
 

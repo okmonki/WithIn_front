@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.CalendarView
-import androidx.appcompat.app.AppCompatActivity
 import com.example.within_front.R
 import com.example.within_front.base.BaseActivity
 import java.time.LocalDate
@@ -12,7 +11,6 @@ import java.time.format.TextStyle
 import java.util.*
 
 class CalendarActivity : BaseActivity() {
-
     private val calendar : CalendarView by lazy{
         findViewById(R.id.calendar)
     }
@@ -34,7 +32,8 @@ class CalendarActivity : BaseActivity() {
             val dayOfWeek = date.dayOfWeek
 
             val intent = Intent(this, MenuActivity::class.java)
-            intent.putExtra("date", "${dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.US)} ${(month+1).toString().padStart(2,'0')} $dayOfMonth")
+            intent.putExtra("date", "${dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.US)} ${(month+1).toString().padStart(2,'0')} ${dayOfMonth.toString().padStart(2,'0')}")
+            finish()
             startActivity(intent)
         }
     }

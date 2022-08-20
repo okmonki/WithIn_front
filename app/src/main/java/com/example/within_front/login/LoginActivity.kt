@@ -70,6 +70,11 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        if(pref.getLong("user id", -1) != -1L){
+            val intent = Intent(this, MyPageActivity::class.java)
+            startActivity(intent)
+        }
+
         auth=FirebaseAuth.getInstance()
 
         initEmailAndPasswordEnable()
