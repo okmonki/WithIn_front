@@ -8,16 +8,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.within_front.R
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.Request
-import okhttp3.Response
+import com.example.within_front.base.BaseActivity
 import okhttp3.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 
-class BelongActivity : AppCompatActivity() {
+class BelongActivity : BaseActivity() {
 
     private val client = OkHttpClient()
 
@@ -42,6 +39,8 @@ class BelongActivity : AppCompatActivity() {
 
         setUnit(userId)
         getBoard(userId)
+
+        initNavigation("board")
     }
     private fun initRecyclerView(){
         belongContainer.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)

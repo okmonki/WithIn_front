@@ -1,8 +1,11 @@
 package com.example.within_front.board
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,16 +13,26 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.within_front.board.PostAdapter
 import com.example.within_front.R
 import okhttp3.*
+import com.example.within_front.base.BaseActivity
+import com.example.within_front.login.SignupActivity
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 
-class BoardActivity : AppCompatActivity() {
-
-    private val client = OkHttpClient()
+class BoardActivity : BaseActivity() {
 
     private val boardName : TextView by lazy {
         findViewById(R.id.board)
+    }
+
+    val client = OkHttpClient()
+
+    val backImageButton: ImageButton by lazy {
+        findViewById(R.id.arrowImg)
+    }
+
+    val pencilImageButton: ImageButton by lazy {
+        findViewById(R.id.write_button)
     }
 
     private val postContainer : RecyclerView by lazy{
@@ -27,6 +40,8 @@ class BoardActivity : AppCompatActivity() {
     }
 
     private var postList = mutableListOf<Post>()
+
+    val category : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,13 +54,18 @@ class BoardActivity : AppCompatActivity() {
         }
         getPost(boardId)
         setBoardName(boardId)
+        initRecyclerView()
+        initBackImageButton()
+        initPencilImageButton(initView())
+
+        initNavigation("board")
     }
+
     private fun initRecyclerView(){
         postContainer.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         postContainer.setHasFixedSize(true)
         postContainer.adapter = PostAdapter(this, postList)
     }
-
 
     private fun getPost(boardId : Long){
         val getPostRequest = Request.Builder().addHeader("Content-Type", "application/json").url("http:52.78.137.155:8080/post/boards/$boardId").build()
@@ -112,5 +132,25 @@ class BoardActivity : AppCompatActivity() {
                 if(response.code() == 200){
                     boardName.text = response.body()!!.string()
         } } })
+    }
+
+    private fun initBackImageButton(){
+        backImageButton.setOnClickListener{
+            finish()
+        }
+    }
+
+    private fun initView() : String{
+        val intent=intent
+        val postId=intent.getStringExtra("category")
+        return postId!!
+    }
+
+    private fun initPencilImageButton(category : String) {
+        pencilImageButton.setOnClickListener {
+            val intent = Intent(this, WriteANewPostActivity::class.java)
+            intent.putExtra("category", category)
+            startActivity(intent)
+        }
     }
 }
