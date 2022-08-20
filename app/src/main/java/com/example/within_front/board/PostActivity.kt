@@ -12,12 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.within_front.R
 import okhttp3.*
+import com.example.within_front.base.BaseActivity
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 import java.time.LocalDateTime
 
-class PostActivity : AppCompatActivity() {
+class PostActivity : BaseActivity() {
 
     private val client = OkHttpClient()
 
@@ -78,7 +79,7 @@ class PostActivity : AppCompatActivity() {
         val intent = intent
 
         // TODO default 0으로 바꿔주어야 함
-        val postId = intent.getLongExtra("postId", 1)
+        val postId = intent.getLongExtra("postId", 0)
         if(postId == 0L){
             Toast.makeText(this, "게시글 조회에 실패했습니다.", Toast.LENGTH_SHORT).show()
             finish()
@@ -89,6 +90,8 @@ class PostActivity : AppCompatActivity() {
         Log.d("test", "test")
         initWriteCommentButton(postId)
         initLikeButton(postId)
+
+        initNavigation("board")
     }
 
     private fun initRecyclerView(){
