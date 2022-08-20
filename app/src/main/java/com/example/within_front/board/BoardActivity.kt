@@ -94,7 +94,7 @@ class BoardActivity : AppCompatActivity() {
 
     private fun setBoardName(boardId : Long) {
 
-        val getBoardNameRequest = Request.Builder().url("http:52.78.137.155:8080/boards/$boardId/name").build()
+        val getBoardNameRequest = Request.Builder().url("http:52.78.137.155:8080/post/boards/$boardId/name").build()
 
         client.newCall(getBoardNameRequest).enqueue(object: Callback {
             override fun onFailure(call: Call, e: IOException) {

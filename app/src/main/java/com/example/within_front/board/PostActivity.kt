@@ -46,9 +46,16 @@ class PostActivity : AppCompatActivity() {
     private val writeCommentBtn: ImageButton by lazy {
         findViewById(R.id.write_comment_btn)
     }
+    private val likeBtn : ImageButton by lazy {
+        findViewById(R.id.like_img)
+    }
     private val getComment : EditText by lazy {
         findViewById(R.id.get_comment)
     }
+
+
+
+
     private val commentAdapter : CommentAdapter by lazy {
         CommentAdapter(this, commentList)
     }
@@ -78,8 +85,10 @@ class PostActivity : AppCompatActivity() {
         }
         getComments(postId)
         getPost(postId)
+        setHeart(postId)
         Log.d("test", "test")
         initWriteCommentButton(postId)
+        initLikeButton(postId)
     }
 
     private fun initRecyclerView(){
@@ -198,6 +207,104 @@ class PostActivity : AppCompatActivity() {
                 })
             }
         }
+    }
+
+
+    private fun initLikeButton(postId: Long){
+        likeBtn.setOnClickListener {
+            val getIsLikedRequest = Request.Builder().url("http:52.78.137.155:8080/post/board/${postId}/isLiked?userId=$userId").build()
+
+            client.newCall(getIsLikedRequest).enqueue(object: Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    Log.d("fail", "게시판 이름 조회 실패")
+                    runOnUiThread{
+                        Toast.makeText(
+                            this@PostActivity,
+                            "게시판 이름 조회에 실패했습니다. 다시 시도해주세요.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    if(response.code() == 200){
+                        // 좋아요 누른 적 있으면 true
+                        if (response.body()!!.string().toBoolean()) {
+                            likeBtn.setImageResource(R.drawable.heart_empty)
+                            val likesRequest = Request.Builder().url("http:52.78.137.155:8080/post/boards/$postId/unlikes?userId=$userId").build()
+
+
+                            client.newCall(likesRequest).enqueue(object: Callback {
+                                override fun onFailure(call: Call, e: IOException) {
+                                    Log.d("fail", "좋아요 취소 실패")
+                                    runOnUiThread {
+                                        Toast.makeText(
+                                            this@PostActivity,
+                                            "좋아요 취소를 실패했습니다. 다시 시도해주세요.",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
+
+                                override fun onResponse(call: Call, response: Response) {
+                                    if (response.code() == 200) {
+                                        likeCount.text = response.body()!!.string()
+                                    }
+                                }
+                            })
+                        } else {
+                            likeBtn.setImageResource(R.drawable.heart)
+
+                            val likesRequest = Request.Builder().url("http:52.78.137.155:8080/post/boards/$postId/likes?userId=$userId").build()
+                            client.newCall(likesRequest).enqueue(object: Callback {
+                                override fun onFailure(call: Call, e: IOException) {
+                                    Log.d("fail", "좋아요 실패")
+                                    runOnUiThread {
+                                        Toast.makeText(
+                                            this@PostActivity,
+                                            "좋아요를 실패했습니다. 다시 시도해주세요.",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
+
+                                override fun onResponse(call: Call, response: Response) {
+                                    if (response.code() == 200) {
+                                        likeCount.text = response.body()!!.string()
+                                    }
+                                }
+                            })
+                        }
+                    }
+                }
+            })
+        }
+    }
+
+    private fun setHeart(postId : Long) {
+        val getIsLikedRequest = Request.Builder().url("http:52.78.137.155:8080/post/board/${postId}/isLiked?userId=$userId").build()
+
+        client.newCall(getIsLikedRequest).enqueue(object: Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                Log.d("fail", "좋아요 조회 실패")
+                runOnUiThread {
+                    Toast.makeText(
+                        this@PostActivity,
+                        "좋아요 조회에 실패했습니다. 다시 시도해주세요.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                if (response.code() == 200) {
+                    // 좋아요 누른 적 있으면 true
+                    if (response.body()!!.string().toBoolean()) {
+                        likeBtn.setImageResource(R.drawable.heart)
+                    }
+                }
+            }
+        })
     }
 
     companion object{
