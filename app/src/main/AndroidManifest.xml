@@ -17,7 +17,7 @@
         android:theme="@style/Theme.WithIn_front"
         tools:targetApi="31">
         <activity
-            android:name=".board.BelongActivity"
+            android:name=".board.PostActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,7 +33,7 @@
         <activity android:name=".menu.MenuActivity"/>
         <activity android:name=".menu.CalendarActivity"/>
         <activity android:name=".login.SignupActivity"/>
-        <activity android:name=".board.PostActivity" />
+        <activity android:name=".board.BelongActivity" />
         <activity android:name=".board.BoardActivity" />
     </application>
 

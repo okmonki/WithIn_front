@@ -1,7 +1,9 @@
 package com.example.within_front.board
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
@@ -13,6 +15,7 @@ import okhttp3.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
+import java.time.LocalDateTime
 
 class PostActivity : AppCompatActivity() {
 
@@ -40,6 +43,17 @@ class PostActivity : AppCompatActivity() {
     private val date: TextView by lazy {
         findViewById(R.id.date)
     }
+    private val writeCommentBtn: ImageButton by lazy {
+        findViewById(R.id.write_comment_btn)
+    }
+    private val getComment : EditText by lazy {
+        findViewById(R.id.get_comment)
+    }
+    private val commentAdapter : CommentAdapter by lazy {
+        CommentAdapter(this, commentList)
+    }
+
+
 
 
 
@@ -62,12 +76,13 @@ class PostActivity : AppCompatActivity() {
         }
         getComments(postId)
         getPost(postId)
+        Log.d("test", "test")
+        initWriteCommentButton(postId)
     }
 
     private fun initRecyclerView(){
         commentContainer.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        commentContainer.setHasFixedSize(true)
-        commentContainer.adapter = CommentAdapter(this, commentList)
+        commentContainer.adapter = commentAdapter
     }
 
     private fun getComments(postId : Long){
@@ -140,5 +155,46 @@ class PostActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    private fun initWriteCommentButton(postId: Long){
+        writeCommentBtn.setOnClickListener {
+            Log.d("click", "btn")
+            // {"content": "댓글"}
+
+            if(getComment.text.isNotEmpty()){
+                val commentData = "{\"content\": \"${getComment.text}\"}"
+                val body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), commentData)
+                val writeCommentRequest = Request.Builder().addHeader("Content-Type", "application/json").url("http:52.78.137.155:8080/post/boards/$postId/comments?authorId=1").post(body).build()
+
+                client.newCall(writeCommentRequest).enqueue(object : Callback{
+                    override fun onFailure(call: Call, e: IOException) {
+                        Log.d("fail", "댓글 작성 실패")
+                        runOnUiThread{
+                            Toast.makeText(
+                                this@PostActivity,
+                                "댓글 작성세 실패하였습니다. 다시 시도해주세요.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+
+                    @SuppressLint("NewApi")
+                    override fun onResponse(call: Call, response: Response) {
+                        if(response.code() == 200){
+                            Log.d("success", "댓글 작성 성공")
+                            // TODO author에 작성자 이름 뜨게..
+                            commentList.add(Comment(author = "1", content = getComment.text.toString(), date = LocalDateTime.now().toString().substring(11..15)))
+                            Log.d("list", commentList.lastOrNull().toString())
+                            runOnUiThread {
+                                commentAdapter.notifyItemInserted(commentList.size)
+                                commentContainer.smoothScrollToPosition(commentList.size)
+                                getComment.setText("")
+                            }
+                        }
+                    }
+                })
+            }
+        }
     }
 }

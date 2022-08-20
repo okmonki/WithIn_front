@@ -71,6 +71,7 @@ class BelongActivity : AppCompatActivity() {
                     val position = tempBoard.getString("position")
                     val mbti = tempBoard.getString("mbti")
 
+                    boardList.add(Board("자유 게시판", "자유롭게 글을 쓸 수 있는 공간"))
                     boardList.add(Board("칭찬 게시판", "부대 미담 관련 글"))
                     boardList.add(Board("건의 게시판", "건의 내용 관련 글"))
                     boardList.add(Board(position.plus(" 게시판"), "보직 관련 글"))

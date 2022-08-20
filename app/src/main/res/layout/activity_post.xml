@@ -185,6 +185,7 @@
         />
 
     <ImageButton
+        android:id="@+id/write_comment_btn"
         android:layout_width="22dp"
         android:layout_height="11dp"
         app:layout_constraintEnd_toEndOf="@id/get_comment"
