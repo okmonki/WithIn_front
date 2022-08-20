@@ -13,6 +13,8 @@ import okhttp3.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
+import java.time.format.TextStyle
+import java.util.*
 
 class MyGroupReadActivity : BaseActivity() {
 
@@ -57,6 +59,12 @@ class MyGroupReadActivity : BaseActivity() {
     private fun initCreateButton() {
         createButton.setOnClickListener {
             val intent = Intent(this, MyGroupUpdateActivity::class.java)
+
+            intent.putExtra("unit", unitText.text.toString())
+            intent.putExtra("position", positionText.text.toString())
+            intent.putExtra("mbti", mbtiText.text.toString())
+            intent.putExtra("hobby", hobbyText.text.toString())
+
             finish()
             startActivity(intent)
         }
@@ -88,7 +96,6 @@ class MyGroupReadActivity : BaseActivity() {
                         hobbyList.add(Hobby(category = category, describe = describe))
                     }
                     runOnUiThread{
-
                         for (item in hobbyList) {
                             val category = item.category
                             when(item.describe){
