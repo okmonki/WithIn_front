@@ -30,7 +30,7 @@ class BoardAdapter(val context: Context, private var boardList : MutableList<Boa
                 val board = boardList[curPos]
 
                 val intent = Intent(context, BoardActivity::class.java)
-                intent.putExtra("category", board.boardName)
+                intent.putExtra("boardId", board.boardId)
 
                 context.startActivity(intent)
             }

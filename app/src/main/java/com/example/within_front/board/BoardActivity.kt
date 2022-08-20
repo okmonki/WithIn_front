@@ -32,12 +32,13 @@ class BoardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board)
         val intent = intent
-        val category = intent.getStringExtra("category")
-        getPost(category!!)
-        boardNaming(category!!)
-
-//        getPost("soccer")
-//        boardNaming("soccer")
+        val boardId = intent.getLongExtra("boardId", 0)
+        if (boardId == 0L) {
+            Toast.makeText(this, "게시판 조회에 실패했습니다.", Toast.LENGTH_SHORT).show()
+            finish()
+        }
+        getPost(boardId)
+        setBoardName(boardId)
     }
     private fun initRecyclerView(){
         postContainer.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -46,8 +47,8 @@ class BoardActivity : AppCompatActivity() {
     }
 
 
-    private fun getPost(category : String){
-        val getPostRequest = Request.Builder().addHeader("Content-Type", "application/json").url("http:52.78.137.155:8080/post/boards/$category").build()
+    private fun getPost(boardId : Long){
+        val getPostRequest = Request.Builder().addHeader("Content-Type", "application/json").url("http:52.78.137.155:8080/post/boards/$boardId").build()
 
         client.newCall(getPostRequest).enqueue(object: Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -73,7 +74,7 @@ class BoardActivity : AppCompatActivity() {
                         val postTitle = tempPost.getString("title")
                         val author = tempPost.getString("authorNickname")
                         val content = tempPost.getString("content")
-                        val commentCount = 1
+                        val commentCount = tempPost.getInt("commentCount")
                         val likeCount = tempPost.getInt("liked")
                         val postId = tempPost.getLong("id")
 
@@ -91,7 +92,25 @@ class BoardActivity : AppCompatActivity() {
         })
     }
 
-    private fun boardNaming(category : String) {
-        boardName.text = category.plus(" 게시판")
+    private fun setBoardName(boardId : Long) {
+
+        val getBoardNameRequest = Request.Builder().url("http:52.78.137.155:8080/boards/$boardId/name").build()
+
+        client.newCall(getBoardNameRequest).enqueue(object: Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                Log.d("fail", "게시판 이름 조회 실패")
+                runOnUiThread{
+                    Toast.makeText(
+                        this@BoardActivity,
+                        "게시판 이름 조회에 실패했습니다. 다시 시도해주세요.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                if(response.code() == 200){
+                    boardName.text = response.body()!!.string()
+        } } })
     }
 }

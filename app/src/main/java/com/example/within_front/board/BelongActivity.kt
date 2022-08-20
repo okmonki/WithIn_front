@@ -31,12 +31,17 @@ class BelongActivity : AppCompatActivity() {
 
     private var boardList = mutableListOf<Board>()
 
+
+    private val pref = getSharedPreferences(PostActivity.USER_INFO, MODE_PRIVATE)
+    private val userId = pref.getLong("user id", -1)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_belong)
         initRecyclerView()
 
-        getBoard(1)
+        setUnit(userId)
+        getBoard(userId)
     }
     private fun initRecyclerView(){
         belongContainer.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -45,9 +50,7 @@ class BelongActivity : AppCompatActivity() {
     }
 
 
-
-
-    private fun getBoard(userId : Int){
+    private fun getBoard(userId : Long){
         val getBoardRequest = Request.Builder().addHeader("Content-Type", "application/json").url("http:52.78.137.155:8080/user/$userId/myGroup").build()
 
         client.newCall(getBoardRequest).enqueue(object: Callback {
@@ -66,27 +69,16 @@ class BelongActivity : AppCompatActivity() {
                 if(response.code() == 200){
                     boardList = mutableListOf()
                     val jsonArray = JSONArray(response.body()!!.string())
-                    val tempBoard = jsonArray[0] as JSONObject
-                    val army = tempBoard.getString("army")
-                    val position = tempBoard.getString("position")
-                    val mbti = tempBoard.getString("mbti")
 
-                    boardList.add(Board("자유 게시판", "자유롭게 글을 쓸 수 있는 공간"))
-                    boardList.add(Board("칭찬 게시판", "부대 미담 관련 글"))
-                    boardList.add(Board("건의 게시판", "건의 내용 관련 글"))
-                    boardList.add(Board(position.plus(" 게시판"), "보직 관련 글"))
-                    boardList.add(Board(mbti.plus(" 게시판"), "MBTI 관련 글"))
-
-
-                    val boardExplanation = "취미 관련 글"
                     for(idx in 0 until jsonArray.length()){
                         val tempBoard = jsonArray[idx] as JSONObject
                         val boardName = tempBoard.getString("category")
-                        val board = Board(boardName, boardExplanation)
+                        val boardExplanation = tempBoard.getString("boardExplanation")
+                        val boardId = tempBoard.getLong("boardId")
+                        val board = Board(boardName, boardExplanation, boardId)
                         boardList.add(board)
                     }
-
-                    belong.text = army.plus(" 게시판")
+//                    belong.text = army.plus(" 게시판")
 
                     Log.d("boardList", boardList.size.toString())
                     runOnUiThread{
@@ -95,5 +87,34 @@ class BelongActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    private fun setUnit(userId : Long){
+        val getUnitRequest = Request.Builder().addHeader("Content-Type", "application/json").url("http:52.78.137.155:8080/user/$userId/unit").build()
+
+        client.newCall(getUnitRequest).enqueue(object: Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                Log.d("fail", "소속 부대 조회 실패")
+                runOnUiThread{
+                    Toast.makeText(
+                        this@BelongActivity,
+                        "소속 부대 조회에 실패했습니다. 다시 시도해주세요.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                if(response.code() == 200){
+                    val tempUnit = JSONObject(response.body()!!.string())
+                    belong.text = tempUnit.getString("unitName")
+
+                }
+            }
+        })
+    }
+
+    companion object{
+        const val USER_INFO = "user info"
     }
 }

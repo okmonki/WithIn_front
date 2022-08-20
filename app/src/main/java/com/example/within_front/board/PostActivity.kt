@@ -54,6 +54,8 @@ class PostActivity : AppCompatActivity() {
     }
 
 
+    private val pref = getSharedPreferences(USER_INFO, MODE_PRIVATE)
+    private val userId = pref.getLong("user id", -1)
 
 
 
@@ -68,7 +70,7 @@ class PostActivity : AppCompatActivity() {
         setContentView(R.layout.activity_post)
         val intent = intent
 
-        // defalut 0으로 바꿔주어야 함
+        // TODO default 0으로 바꿔주어야 함
         val postId = intent.getLongExtra("postId", 1)
         if(postId == 0L){
             Toast.makeText(this, "게시글 조회에 실패했습니다.", Toast.LENGTH_SHORT).show()
@@ -149,7 +151,7 @@ class PostActivity : AppCompatActivity() {
                     postTitle.text = tempPost.getString("title")
                     author.text = tempPost.getString("authorNickname")
                     content.text = tempPost.getString("content")
-                    commentCount.text = 1.toString()
+                    commentCount.text = tempPost.getInt("commentCount").toString()
                     likeCount.text = tempPost.getInt("liked").toString()
                     date.text = tempPost.getString("createdAt")
                 }
@@ -165,7 +167,7 @@ class PostActivity : AppCompatActivity() {
             if(getComment.text.isNotEmpty()){
                 val commentData = "{\"content\": \"${getComment.text}\"}"
                 val body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), commentData)
-                val writeCommentRequest = Request.Builder().addHeader("Content-Type", "application/json").url("http:52.78.137.155:8080/post/boards/$postId/comments?authorId=1").post(body).build()
+                val writeCommentRequest = Request.Builder().addHeader("Content-Type", "application/json").url("http:52.78.137.155:8080/post/boards/$postId/comments?authorId=$userId").post(body).build()
 
                 client.newCall(writeCommentRequest).enqueue(object : Callback{
                     override fun onFailure(call: Call, e: IOException) {
@@ -183,7 +185,7 @@ class PostActivity : AppCompatActivity() {
                     override fun onResponse(call: Call, response: Response) {
                         if(response.code() == 200){
                             Log.d("success", "댓글 작성 성공")
-                            // TODO author에 작성자 이름 뜨게..
+                            // TODO author에 작성자 이름 뜨게.. << 이것도 user
                             commentList.add(Comment(author = "1", content = getComment.text.toString(), date = LocalDateTime.now().toString().substring(11..15)))
                             Log.d("list", commentList.lastOrNull().toString())
                             runOnUiThread {
@@ -196,5 +198,9 @@ class PostActivity : AppCompatActivity() {
                 })
             }
         }
+    }
+
+    companion object{
+        const val USER_INFO = "user info"
     }
 }
