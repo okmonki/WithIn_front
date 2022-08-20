@@ -76,8 +76,15 @@ class LoginActivity : AppCompatActivity() {
         setPasswordShowingState()
         checkEmailTextWatcher()
         initLoginButton()
-        initSignupButton()
+        initSignUpButton()
 
+    }
+
+    private fun initSignUpButton(){
+        signUpButton.setOnClickListener {
+            val intent = Intent(this, SignupActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun getInputEmail() : String {
@@ -120,14 +127,6 @@ class LoginActivity : AppCompatActivity() {
             }
         })
     }
-
-    private fun initSignupButton() {
-        signUpButton.setOnClickListener {
-            val intent = Intent(this, SignupActivity::class.java)
-            startActivity(intent)
-        }
-    }
-
     private fun initLoginButton() {
         //login 버튼이 눌린다면
         loginButton.setOnClickListener {

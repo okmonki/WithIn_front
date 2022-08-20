@@ -297,20 +297,4 @@ class SignupActivity : AppCompatActivity() {
         return super.dispatchTouchEvent(ev)
     }
 
-    private fun setPasswordShowingState(editText: EditText, show: ImageButton, hide: ImageButton) {
-        show.setOnClickListener {
-            showPassword(hide, show)
-            editText.transformationMethod = HideReturnsTransformationMethod.getInstance()
-        }
-        hide.setOnClickListener {
-            showPassword(show, hide)
-            editText.transformationMethod = PasswordTransformationMethod.getInstance()
-        }
-    }
-
-    private fun showPassword(show: ImageButton, hide: ImageButton) {
-        show.visibility = View.VISIBLE
-        hide.visibility = View.GONE
-    }
-
 }

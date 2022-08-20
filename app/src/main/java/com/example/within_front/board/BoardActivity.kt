@@ -73,15 +73,15 @@ class BoardActivity : AppCompatActivity() {
     }
 
     private fun getPosts(postId : Long){
-        val getPostRequest = Request.Builder().addHeader("Content-Type""http://52.78.137.155:8080/boards/$category")
+        val getPostRequest = Request.Builder().addHeader("Content-Type", "http://52.78.137.155:8080/boards/$category")
     }
 
-    private fun initPencilImageButton(category : String){
+    private fun initPencilImageButton(category : String) {
         pencilImageButton.setOnClickListener {
             val intent = Intent(this, WriteANewPostActivity::class.java)
-            intent.putExtra("category",category)
+            intent.putExtra("category", category)
             startActivity(intent)
+        }
     }
-
 }
 

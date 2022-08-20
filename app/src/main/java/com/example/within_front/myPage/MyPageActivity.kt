@@ -9,14 +9,13 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
-import com.example.within_front.LoginActivity
+import com.example.within_front.login.LoginActivity
 import com.example.within_front.R
 import com.google.firebase.auth.FirebaseAuth
-import com.example.within_front.login.LoginActivity
 
 class MyPageActivity : AppCompatActivity() {
     private val pref by lazy{
-        getSharedPreferences(LoginActivity.USER_INFO, MODE_PRIVATE)
+        getSharedPreferences(USER_INFO, MODE_PRIVATE)
     }
 
     private val myGroupButton: AppCompatButton by lazy {
@@ -91,8 +90,8 @@ class MyPageActivity : AppCompatActivity() {
                 "로그아웃 되었습니다.",
                 Toast.LENGTH_SHORT
             ).show()
-            startActivity(intent)
             finish()
+            startActivity(intent)
         }
         dlg.show()
     }

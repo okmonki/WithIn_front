@@ -25,8 +25,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"/>
-        <activity android:android:name=".myPage.MessageChatActivity"/>
-        <activity android:name=".login.LoginActivity"/>
+        <activity android:name=".myPage.MessageChatActivity"/>
+        <activity android:name=".login.SignupActivity"/>
         <activity android:name=".login.InterestActivity"/>
         <activity android:name=".myPage.MyPageActivity" />
         <activity android:name=".myPage.MyGroupReadActivity" />
