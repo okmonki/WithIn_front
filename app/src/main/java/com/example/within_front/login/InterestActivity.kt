@@ -78,7 +78,7 @@ class InterestActivity : AppCompatActivity() {
             }
         }
 
-        val interestMBTIList= listOf("INFJ","INFP","ENFJ","ENFP","ISTJ","ISFJ","ESTJ","ESFJ","ISTP","ISFP","ESTP","ESFP")
+        val interestMBTIList= listOf("INFJ","INFP","ENFJ","ENFP","ISTJ","ISFJ","ESTJ","ESFJ","ISTP","ISFP","ESTP","ESFP", "INTJ", "INTP", "ENTJ", "ENTP")
         val interestMBTIAdapter = ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, interestMBTIList)
         interestMBTISpinner.adapter=interestMBTIAdapter
         interestMBTISpinner.onItemSelectedListener=object: AdapterView.OnItemSelectedListener{

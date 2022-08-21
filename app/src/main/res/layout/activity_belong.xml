@@ -28,6 +28,7 @@
         app:layout_constraintStart_toEndOf="@id/belong"
         android:layout_marginStart="20dp"
         android:background="@color/red"
+        android:visibility="gone"
         />
 
     <View

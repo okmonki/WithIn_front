@@ -23,9 +23,9 @@ class MyGroupUpdateActivity : BaseActivity() {
     private var hobby : String = ""
     private var hobbyList = listOf<String>()
 
-    private var unitItems = arrayOf("미사일 사령부", "소속 부대 2", "소속 부대 3")
-    private var positionItems = arrayOf("운전병", "행정병", "통신병", "의무병")
-    private var mbtiItems = arrayOf("ENFJ", "ENTJ", "ENFP", "ENTP", "ESFP", "ESFJ", "ESTP", "ESTJ", "INFP", "INFJ", "INTP", "ISTP", "ISFP", "ISFJ", "ISTJ", "INTJ")
+    private var unitItems = arrayOf("1군단","1사단","25사단","28사단","5사단","6사단","3사단","15사단","7사단","21사단","12사단","22사단","23사단","27사단","9사단","수도기계화사단","8사단","11사단","2신속대응사단","60사단","66사단","72사단","73사단","75사단","52사단","56사단","51사단","55사단","31사단","32사단","35사단","36사단","37사단","39사단","50사단","53사단")
+    private var positionItems = arrayOf("보병", "기갑", "포병", "방공", "정보", "공병", "정보", "공병", "정보통신", "항공", "화학", "병기", "병참", "수송", "인사행정", "헌병", "재정", "정훈", "의무", "법무", "군종")
+    private var mbtiItems = arrayOf("INFJ","INFP","ENFJ","ENFP","ISTJ","ISFJ","ESTJ","ESFJ","ISTP","ISFP","ESTP","ESFP", "INTJ", "INTP", "ENTJ", "ENTP")
 
     private val backButton : ImageButton by lazy{
         findViewById(R.id.back_button)
@@ -69,6 +69,15 @@ class MyGroupUpdateActivity : BaseActivity() {
     private val hobby9CheckBox: CheckBox by lazy {
         findViewById(R.id.my_hobby9)
     }
+    private val hobby10CheckBox : CheckBox by lazy{
+        findViewById(R.id.my_hobby10)
+    }
+    private val hobby11CheckBox : CheckBox by lazy{
+        findViewById(R.id.my_hobby11)
+    }
+    private val hobby12CheckBox : CheckBox by lazy{
+        findViewById(R.id.my_hobby12)
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -103,22 +112,27 @@ class MyGroupUpdateActivity : BaseActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
             }
         }
+
         if (intent.hasExtra("unit")) {
             unit = intent.getStringExtra("unit").toString()
             Log.d("데이터 가져오기", unit)
         }
+
         if (intent.hasExtra("position")) {
             position = intent.getStringExtra("position").toString()
             Log.d("데이터 가져오기", position)
         }
+
         if (intent.hasExtra("mbti")) {
             mbti = intent.getStringExtra("mbti").toString()
             Log.d("데이터 가져오기", mbti)
         }
+
         if (intent.hasExtra("hobby")) {
             hobby = intent.getStringExtra("hobby").toString()
             Log.d("데이터 가져오기", hobby)
         }
+
         unitSpinner.setSelection(unitItems.indexOf(unit))
         positionSpinner.setSelection(positionItems.indexOf(position))
         mbtiSpinner.setSelection(mbtiItems.indexOf(mbti))
@@ -150,6 +164,15 @@ class MyGroupUpdateActivity : BaseActivity() {
         }
         if (hobby9CheckBox.text in hobbyList) {
             hobby9CheckBox.isChecked = true
+        }
+        if (hobby10CheckBox.text in hobbyList) {
+            hobby10CheckBox.isChecked = true
+        }
+        if (hobby11CheckBox.text in hobbyList) {
+            hobby11CheckBox.isChecked = true
+        }
+        if (hobby12CheckBox.text in hobbyList) {
+            hobby12CheckBox.isChecked = true
         }
 
         initNavigation("myPage")
@@ -196,6 +219,16 @@ class MyGroupUpdateActivity : BaseActivity() {
             if(hobby9CheckBox.isChecked()) {
                 hobbyList.add("\"${hobby9CheckBox.text}\"")
             }
+            if(hobby10CheckBox.isChecked()) {
+                hobbyList.add("\"${hobby10CheckBox.text}\"")
+            }
+            if(hobby11CheckBox.isChecked()) {
+                hobbyList.add("\"${hobby11CheckBox.text}\"")
+            }
+            if(hobby12CheckBox.isChecked()) {
+                hobbyList.add("\"${hobby12CheckBox.text}\"")
+            }
+
             val postData = "{\"army\": \"${unitSpinner.selectedItem}\", \"position\": \"${positionSpinner.selectedItem}\", \"mbti\": \"${mbtiSpinner.selectedItem}\", \"categories\": $hobbyList}"
             Log.d("category", "$hobbyList")
             Log.d("unitSpinner", unitSpinner.selectedItem.toString())
