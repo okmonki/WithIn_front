@@ -43,13 +43,10 @@ class WriteANewPostActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_post)
-        // TODO
-//        val userId = pref.getLong("user id", -1)
+        userId = pref.getLong("user id", -1)
 
         val intent = intent
-        // TODO
-//        val boardId = intent.getLongExtra("boardId", 0)
-        val boardId = 1L
+        val boardId = intent.getLongExtra("boardId", 0)
         if (boardId == 0L) {
             Toast.makeText(this, "게시판 조회에 실패했습니다.", Toast.LENGTH_SHORT).show()
             finish()
