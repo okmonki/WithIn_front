@@ -1,8 +1,11 @@
 package com.example.within_front.board
 
 import android.annotation.SuppressLint
+import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
@@ -47,8 +50,14 @@ class PostActivity : BaseActivity() {
     private val writeCommentBtn: ImageButton by lazy {
         findViewById(R.id.write_comment_btn)
     }
+    private val likeBtn : ImageButton by lazy {
+        findViewById(R.id.like_img)
+    }
     private val getComment : EditText by lazy {
         findViewById(R.id.get_comment)
+    }
+    private val backImageButton : ImageButton by lazy {
+        findViewById(R.id.arrowImg)
     }
     private val commentAdapter : CommentAdapter by lazy {
         CommentAdapter(this, commentList)
@@ -58,7 +67,7 @@ class PostActivity : BaseActivity() {
     private val pref by lazy {
         getSharedPreferences(USER_INFO, MODE_PRIVATE)
     }
-    private var userId = 0L;
+    private var userId = 0L
     private var userNickname = ""
 
 
@@ -83,10 +92,10 @@ class PostActivity : BaseActivity() {
         }
         getComments(postId)
         getPost(postId)
-        Log.d("test", "test")
         initWriteCommentButton(postId)
-        initRecyclerView()
 
+        initLikeButton(postId)
+        initBackImageButton()
         initNavigation("board")
     }
 
@@ -120,7 +129,7 @@ class PostActivity : BaseActivity() {
                         val tempComment = jsonArray[idx] as JSONObject
                         val author = tempComment.getString("authorName")
                         val content = tempComment.getString("content")
-                        val createdAt = tempComment.getString("createdAt")
+                        val createdAt = tempComment.getString("createdAt").substring(0..9)
                         val comment = Comment(author = author, content = content, date = createdAt)
                         commentList.add(comment)
                     }
@@ -152,16 +161,18 @@ class PostActivity : BaseActivity() {
 
             override fun onResponse(call: Call, response: Response) {
                 if(response.code() == 200){
-                    commentList = mutableListOf()
+                    //commentList = mutableListOf()
                     val tempPost = JSONObject(response.body()!!.string())
 
-                    boardName.text = tempPost.getString("boardName").plus(" 게시판")
-                    postTitle.text = tempPost.getString("title")
-                    author.text = tempPost.getString("authorNickname")
-                    content.text = tempPost.getString("content")
-                    commentCount.text = tempPost.getInt("commentCount").toString()
-                    likeCount.text = tempPost.getInt("liked").toString()
-                    date.text = tempPost.getString("createdAt")
+                    runOnUiThread {
+                        boardName.text = tempPost.getString("boardName").plus(" 게시판")
+                        postTitle.text = tempPost.getString("title")
+                        author.text = tempPost.getString("authorNickname")
+                        content.text = tempPost.getString("content")
+                        commentCount.text = tempPost.getInt("commentCount").toString()
+                        likeCount.text = tempPost.getInt("likeCount").toString()
+                        date.text = tempPost.getString("createdAt").substring(0..9)
+                    }
                 }
             }
         })
@@ -183,7 +194,7 @@ class PostActivity : BaseActivity() {
                         runOnUiThread{
                             Toast.makeText(
                                 this@PostActivity,
-                                "댓글 작성세 실패하였습니다. 다시 시도해주세요.",
+                                "댓글 작성에 실패하였습니에. 다시 시도해주세요.",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -199,6 +210,7 @@ class PostActivity : BaseActivity() {
                             runOnUiThread {
                                 commentAdapter.notifyItemInserted(commentList.size)
                                 commentContainer.smoothScrollToPosition(commentList.size)
+                                commentCount.text = (commentCount.text.toString().toInt()+1).toString()
                                 getComment.setText("")
                             }
                         }
@@ -206,6 +218,117 @@ class PostActivity : BaseActivity() {
                 })
             }
         }
+    }
+
+    private fun initLikeButton(postId: Long){
+        likeBtn.setOnClickListener {
+            val getIsLikedRequest = Request.Builder().url("http:52.78.137.155:8080/post/boards/${postId}/isLiked?userId=$userId").build()
+
+            client.newCall(getIsLikedRequest).enqueue(object: Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    Log.d("fail", "게시판 좋아요 조회 실패")
+                    runOnUiThread{
+                        Toast.makeText(
+                            this@PostActivity,
+                            "게시판 좋아요 조회에 실패했습니다. 다시 시도해주세요.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    if(response.code() == 200){
+                        // 좋아요 누른 적 있으면 true
+                        if (response.body()!!.string().toBoolean()) {
+                            runOnUiThread {
+                                likeBtn.setImageResource(R.drawable.heart)
+                            }
+                            val likesRequest = Request.Builder().addHeader("Content-Type", "application/json").url("http:52.78.137.155:8080/post/boards/$postId/unlikes?userId=$userId").build()
+
+                            client.newCall(likesRequest).enqueue(object: Callback {
+                                override fun onFailure(call: Call, e: IOException) {
+                                    Log.d("fail", "좋아요 취소 실패")
+                                    runOnUiThread {
+                                        Toast.makeText(
+                                            this@PostActivity,
+                                            "좋아요 취소를 실패했습니다. 다시 시도해주세요.",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
+
+                                override fun onResponse(call: Call, response: Response) {
+                                    if (response.code() == 200) {
+                                        val count = response.body()!!.string()
+                                        runOnUiThread {
+                                            likeBtn.setImageResource(R.drawable.heart_empty)
+                                            likeCount.text = count.toString()
+                                        }
+                                    } else{
+                                        Log.d("like post fail", response.code().toString())
+                                    }
+                                }
+                            })
+                        } else {
+
+                            val likesRequest = Request.Builder().addHeader("Content-Type", "application/json").url("http:52.78.137.155:8080/post/boards/$postId/likes?userId=$userId").build()
+                            client.newCall(likesRequest).enqueue(object: Callback {
+                                override fun onFailure(call: Call, e: IOException) {
+                                    Log.d("fail", "좋아요 실패")
+                                    runOnUiThread {
+                                        Toast.makeText(
+                                            this@PostActivity,
+                                            "좋아요를 실패했습니다. 다시 시도해주세요.",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
+
+                                override fun onResponse(call: Call, response: Response) {
+                                    if (response.code() == 200) {
+                                        val count = response.body()!!.string()
+                                        runOnUiThread {
+                                            likeBtn.setImageResource(R.drawable.heart)
+                                            likeCount.text = count
+                                        }
+                                    } else{
+                                        Log.d("unlike fail", response.code().toString())
+                                    }
+                                }
+                            })
+                        }
+                    } else{
+                        Log.d("fail", "게시판 좋아요 조회 실패, ${response.code()}")
+                    }
+                }
+            })
+        }
+    }
+
+    private fun initBackImageButton(){
+        backImageButton.setOnClickListener{
+            finish()
+        }
+    }
+
+    /**
+     * 현재 포커스된 뷰의 영역이 아닌 다른 곳을 클릭 시 키보드를 내리고 포커스 해제
+     */
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        val focusView = currentFocus
+        if (focusView != null) {
+            val rect = Rect()
+            focusView.getGlobalVisibleRect(rect)
+            val x = ev.x.toInt()
+            val y = ev.y.toInt()
+            if (!rect.contains(x, y)) {
+                val imm: InputMethodManager =
+                    getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                if (imm != null) imm.hideSoftInputFromWindow(focusView.windowToken, 0)
+                focusView.clearFocus()
+            }
+        }
+        return super.dispatchTouchEvent(ev)
     }
 
     companion object{

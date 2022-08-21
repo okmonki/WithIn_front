@@ -40,6 +40,7 @@ class BoardActivity : BaseActivity() {
     }
 
     private var postList = mutableListOf<Post>()
+    private var boardId = 0L
 
     val category : String = ""
 
@@ -47,18 +48,22 @@ class BoardActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board)
         val intent = intent
-        val boardId = intent.getLongExtra("board id", 0)
+        boardId = intent.getLongExtra("board id", 0)
         if (boardId == 0L) {
             Toast.makeText(this, "게시판 조회에 실패했습니다.", Toast.LENGTH_SHORT).show()
             finish()
         }
-        getPost(boardId)
         setBoardName(boardId)
         initRecyclerView()
         initBackImageButton()
-        initPencilImageButton(initView())
+        initPencilImageButton(boardId)
 
         initNavigation("board")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getPost(boardId)
     }
 
     private fun initRecyclerView(){
@@ -95,7 +100,7 @@ class BoardActivity : BaseActivity() {
                         val author = tempPost.getString("authorNickname")
                         val content = tempPost.getString("content")
                         val commentCount = tempPost.getInt("commentCount")
-                        val likeCount = tempPost.getInt("liked")
+                        val likeCount = tempPost.getInt("likeCount")
                         val postId = tempPost.getLong("id")
 
                         val post = Post(postTitle = postTitle, author = author,
@@ -114,7 +119,7 @@ class BoardActivity : BaseActivity() {
 
     private fun setBoardName(boardId : Long) {
 
-        val getBoardNameRequest = Request.Builder().url("http:52.78.137.155:8080/boards/$boardId/name").build()
+        val getBoardNameRequest = Request.Builder().url("http:52.78.137.155:8080/post/boards/$boardId/name").build()
 
         client.newCall(getBoardNameRequest).enqueue(object: Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -130,7 +135,9 @@ class BoardActivity : BaseActivity() {
 
             override fun onResponse(call: Call, response: Response) {
                 if(response.code() == 200){
-                    boardName.text = response.body()!!.string()
+                    runOnUiThread {
+                        boardName.text = response.body()!!.string()
+                    }
         } } })
     }
 
@@ -138,12 +145,6 @@ class BoardActivity : BaseActivity() {
         backImageButton.setOnClickListener{
             finish()
         }
-    }
-
-    private fun initView() : Long{
-        val intent=intent
-        val boardId = intent.getLongExtra("board id", 0L)
-        return boardId
     }
 
     private fun initPencilImageButton(boardId: Long) {
