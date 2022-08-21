@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.within_front.R
 import com.example.within_front.base.BaseActivity
+import com.example.within_front.board.PostActivity
 import okhttp3.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -26,12 +27,19 @@ class MessageBoxActivity : BaseActivity() {
         findViewById(R.id.messagebox_container)
     }
 
+    private val pref by lazy{
+        getSharedPreferences(PostActivity.USER_INFO, MODE_PRIVATE)
+    }
+
+    private var userId = 0L
+
     private var messageList = mutableListOf<Message>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_messagebox)
-        // TODO getMyMessages(userId)
+        userId = pref.getLong("user id", 0L)
+        getMyMessages(userId)
 
         initBackButton()
         initNavigation("myPage")

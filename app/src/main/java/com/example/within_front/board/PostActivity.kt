@@ -55,9 +55,11 @@ class PostActivity : BaseActivity() {
     }
 
 
-    private val pref = getSharedPreferences(USER_INFO, MODE_PRIVATE)
-    private val userId = pref.getLong("user id", -1)
-
+    private val pref by lazy {
+        getSharedPreferences(USER_INFO, MODE_PRIVATE)
+    }
+    private var userId = 0L;
+    private var userNickname = ""
 
 
     private val commentContainer : RecyclerView by lazy{
@@ -70,6 +72,8 @@ class PostActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post)
         val intent = intent
+        userId = pref.getLong("user id", -1)
+        userNickname = pref.getString("user nickname", "").toString()
 
         // TODO default 0으로 바꿔주어야 함
         val postId = intent.getLongExtra("postId", 0)
@@ -190,7 +194,7 @@ class PostActivity : BaseActivity() {
                         if(response.code() == 200){
                             Log.d("success", "댓글 작성 성공")
                             // TODO author에 작성자 이름 뜨게.. << 이것도 user
-                            commentList.add(Comment(author = "1", content = getComment.text.toString(), date = LocalDateTime.now().toString().substring(11..15)))
+                            commentList.add(Comment(author = userNickname, content = getComment.text.toString(), date = LocalDateTime.now().toString().substring(11..15)))
                             Log.d("list", commentList.lastOrNull().toString())
                             runOnUiThread {
                                 commentAdapter.notifyItemInserted(commentList.size)

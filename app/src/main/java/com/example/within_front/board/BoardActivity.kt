@@ -47,7 +47,7 @@ class BoardActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board)
         val intent = intent
-        val boardId = intent.getLongExtra("boardId", 0)
+        val boardId = intent.getLongExtra("board id", 0)
         if (boardId == 0L) {
             Toast.makeText(this, "게시판 조회에 실패했습니다.", Toast.LENGTH_SHORT).show()
             finish()
@@ -140,16 +140,16 @@ class BoardActivity : BaseActivity() {
         }
     }
 
-    private fun initView() : String{
+    private fun initView() : Long{
         val intent=intent
-        val postId=intent.getStringExtra("category")
-        return postId!!
+        val boardId = intent.getLongExtra("board id", 0L)
+        return boardId
     }
 
-    private fun initPencilImageButton(category : String) {
+    private fun initPencilImageButton(boardId: Long) {
         pencilImageButton.setOnClickListener {
             val intent = Intent(this, WriteANewPostActivity::class.java)
-            intent.putExtra("category", category)
+            intent.putExtra("board id", boardId)
             startActivity(intent)
         }
     }

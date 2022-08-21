@@ -22,6 +22,7 @@ import com.example.within_front.R
 import com.example.within_front.myPage.MyPageActivity
 import com.google.firebase.auth.FirebaseAuth
 import okhttp3.*
+import org.json.JSONObject
 import java.io.IOException
 import java.util.regex.Matcher
 import java.util.regex.Pattern
@@ -72,6 +73,7 @@ class LoginActivity : AppCompatActivity() {
 
         if(pref.getLong("user id", -1) != -1L){
             val intent = Intent(this, MyPageActivity::class.java)
+            Toast.makeText(this, "자동 로그인 되었습니다.", Toast.LENGTH_SHORT).show()
             startActivity(intent)
         }
 
@@ -181,11 +183,16 @@ class LoginActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call, response: Response) {
                 if(response.code() == 200){
-                    val userId = response.body()!!.string().toLong()
+                    val userInfo = JSONObject(response.body()!!.string())
+                    val userId = userInfo.getLong("userId")
+                    val userNickname = userInfo.getString("userNickname")
                     val editor = pref.edit()
                     editor.putLong("user id", userId)
+                    editor.putString("user nickname", userNickname)
                     editor.apply()
+
                     Log.d("user id save", userId.toString())
+                    Log.d("user nickname save", userNickname.toString())
                 } else{
                     Log.d("fail", "유저 아이디 조회 실패, ${response.code()}")
                     runOnUiThread{

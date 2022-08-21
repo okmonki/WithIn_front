@@ -54,7 +54,7 @@ class InterestActivity : AppCompatActivity() {
     }
 
     private fun initSpinner(){
-        val interestGroupList= listOf("1사단","25사단","28사단","5사단","6사단","3사단","15사단","7사단","21사단","12사단","22사단","23사단","27사단","9사단","수도기계화사단","8사단","11사단","2신속대응사단","60사단","66사단","72사단","73사단","75사단","52사단","56사단","51사단","55사단","31사단","32사단","35사단","36사단","37사단","39사단","50사단","53사단")
+        val interestGroupList= listOf("1군단","1사단","25사단","28사단","5사단","6사단","3사단","15사단","7사단","21사단","12사단","22사단","23사단","27사단","9사단","수도기계화사단","8사단","11사단","2신속대응사단","60사단","66사단","72사단","73사단","75사단","52사단","56사단","51사단","55사단","31사단","32사단","35사단","36사단","37사단","39사단","50사단","53사단")
         val interestGroupAdapter = ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, interestGroupList)
         interestGroupSpinner.adapter=interestGroupAdapter
         interestGroupSpinner.onItemSelectedListener=object: AdapterView.OnItemSelectedListener{
@@ -66,7 +66,7 @@ class InterestActivity : AppCompatActivity() {
             }
         }
 
-        val interestJobList= listOf("기술행정병","어학병","전문특기병","임기제부사관","연고지복무병","최전방수호병")
+        val interestJobList= listOf("보병", "기갑", "포병", "방공", "정보", "공병", "정보", "공병", "정보통신", "항공", "화학", "병기", "병참", "수송", "인사행정", "헌병", "재정", "정훈", "의무", "법무", "군종")
         val interestJobAdapter = ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, interestJobList)
         interestJobSpinner.adapter=interestJobAdapter
         interestJobSpinner.onItemSelectedListener=object: AdapterView.OnItemSelectedListener{

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.within_front.R
 import com.example.within_front.base.BaseActivity
+import com.example.within_front.board.PostActivity
 import com.example.within_front.myPage.Message
 import com.example.within_front.myPage.MessageBoxAdapter
 import okhttp3.*
@@ -51,22 +52,30 @@ class MessageChatActivity : BaseActivity() {
         MessageChatAdapter(this, messageChatList)
     }
 
+    private val pref by lazy{
+        getSharedPreferences(PostActivity.USER_INFO, MODE_PRIVATE)
+    }
+
+    private var userId = 0L
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_message_chat)
-        //val intent = intent
-        // TODO val userId
-        //val partnerId = intent.getLongExtra("partnerId", 0)
-        //val partnerNickname = intent.getStringExtra("partnerNickname")
-//        if(partnerId == 0L){
-//            Toast.makeText(this, "메세지 조회에 실패했습니다.", Toast.LENGTH_SHORT).show()
-//            finish()
-//        }
+        val intent = intent
+        userId = pref.getLong("user id", 0L)
+        val partnerId = intent.getLongExtra("partnerId", 0)
+        val partnerNickname = intent.getStringExtra("partnerNickname")
+
+        if(partnerId == 0L){
+            Toast.makeText(this, "메세지 조회에 실패했습니다.", Toast.LENGTH_SHORT).show()
+            finish()
+        }
+
         initBackButton()
-        initUserName("test") // TODO
+        initUserName(partnerNickname!!)
         //initInputBox()
-        initSubmitButton(1, 2) // TODO
-        getMessageChat(1, 2) // TODO
+        initSubmitButton(userId, partnerId)
+        getMessageChat(userId, partnerId)
 
         initNavigation("myPage")
     }

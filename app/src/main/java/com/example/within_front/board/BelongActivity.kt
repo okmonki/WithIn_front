@@ -39,6 +39,7 @@ class BelongActivity : BaseActivity() {
         initRecyclerView()
 
         val userId = pref.getLong("user id", -1)
+        Log.d("user id", userId.toString())
         setUnit(userId)
         getBoard(userId)
 
@@ -52,7 +53,7 @@ class BelongActivity : BaseActivity() {
 
 
     private fun getBoard(userId : Long){
-        val getBoardRequest = Request.Builder().addHeader("Content-Type", "application/json").url("http:52.78.137.155:8080/user/$userId/myGroup").build()
+        val getBoardRequest = Request.Builder().addHeader("Content-Type", "application/json").url("http:52.78.137.155:8080/post/$userId/boards").build()
 
         client.newCall(getBoardRequest).enqueue(object: Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -73,18 +74,20 @@ class BelongActivity : BaseActivity() {
 
                     for(idx in 0 until jsonArray.length()){
                         val tempBoard = jsonArray[idx] as JSONObject
-                        val boardName = tempBoard.getString("category")
-                        val boardExplanation = tempBoard.getString("boardExplanation")
-                        val boardId = tempBoard.getLong("boardId")
+                        val boardName = tempBoard.getString("boardName")
+                        val boardExplanation = tempBoard.getString("explanation")
+                        val boardId = tempBoard.getLong("id")
                         val board = Board(boardName, boardExplanation, boardId)
                         boardList.add(board)
                     }
 //                    belong.text = army.plus(" 게시판")
 
-                    Log.d("boardList", boardList.size.toString())
+                    Log.d("boardList", boardList.toString())
                     runOnUiThread{
                         initRecyclerView()
                     }
+                } else{
+                  Log.d("fail", "게시판 조회 실패 ${response.code()}")
                 }
             }
         })
@@ -108,7 +111,9 @@ class BelongActivity : BaseActivity() {
             override fun onResponse(call: Call, response: Response) {
                 if(response.code() == 200){
                     val tempUnit = JSONObject(response.body()!!.string())
-                    belong.text = tempUnit.getString("unitName")
+                    runOnUiThread {
+                        belong.text = tempUnit.getString("unitName")
+                    }
 
                 }
             }

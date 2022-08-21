@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.within_front.R
 import com.example.within_front.base.BaseActivity
+import com.example.within_front.board.PostActivity
 import okhttp3.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -27,12 +28,19 @@ class MyPostActivity : BaseActivity() {
         findViewById(R.id.my_post_container)
     }
 
+    private val pref by lazy{
+        getSharedPreferences(PostActivity.USER_INFO, MODE_PRIVATE)
+    }
+
+    private var userId = 0L
+
     private var myPostList = mutableListOf<MyPost>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mypost)
-        // TODO getMyPost(userId)
+        userId = pref.getLong("user id", 0L)
+        getMyPost(userId)
 
         initBackButton()
         initNavigation("myPage")

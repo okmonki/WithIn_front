@@ -2,6 +2,7 @@ package com.example.within_front.login
 
 import android.content.Intent
 import android.graphics.Rect
+import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.text.method.HideReturnsTransformationMethod
@@ -80,6 +81,10 @@ class SignupActivity : AppCompatActivity() {
         findViewById(R.id.warning_password_reconfirm)
     }
 
+    private val privacyPolicy : TextView by lazy{
+        findViewById(R.id.privacy_policy)
+    }
+
     // validation
     private var isEmailValid = false
     private var isNicknameValid = false
@@ -91,6 +96,7 @@ class SignupActivity : AppCompatActivity() {
         setContentView(R.layout.activity_signup)
 
         initBackButton()
+        initPrivacyLink()
         focusEditText(editTextEmail)
         focusEditText(editTextNickname)
         focusEditText(editTextPassword)
@@ -98,6 +104,13 @@ class SignupActivity : AppCompatActivity() {
         setPasswordShowingState(editTextPassword, eyeClosePassword, eyeOpenPassword)
         setPasswordShowingState(editTextPasswordReconfirm, eyeClosePasswordReconfirm, eyeOpenPasswordReconfirm)
         initSubmitButton()
+    }
+
+    private fun initPrivacyLink(){
+        privacyPolicy.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://blog.naver.com/PostView.naver?blogId=okmonki&Redirect=View&logNo=222853801760&categoryNo=1&isAfterWrite=true&isMrblogPost=false&isHappyBeanLeverage=true&contentLength=50414&isWeeklyDiaryPopupEnabled=false"))
+            startActivity(intent)
+        }
     }
 
     private fun isValidEmail(email: String){
@@ -273,6 +286,7 @@ class SignupActivity : AppCompatActivity() {
             intent.putExtra("email", editTextEmail.text.toString())
             intent.putExtra("nickname", editTextNickname.text.toString())
             intent.putExtra("password", editTextPassword.text.toString())
+            finish()
             startActivity(intent)
         }
     }
