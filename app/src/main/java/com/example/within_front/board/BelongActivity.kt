@@ -32,19 +32,21 @@ class BelongActivity : BaseActivity() {
     private val pref by lazy{
         getSharedPreferences(PostActivity.USER_INFO, MODE_PRIVATE)
     }
+    // TODO userid 기본값 넣어줌
     private var userId = 1L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_belong)
-        pref.getLong("user id", -1)
+        // TODO
+//        pref.getLong("user id", -1)
+        initRecyclerView()
         setUnit(userId)
         getBoard(userId)
         initNavigation("board")
     }
     private fun initRecyclerView(){
         belongContainer.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        belongContainer.setHasFixedSize(true)
         belongContainer.adapter = BoardAdapter(this, boardList)
     }
 
@@ -69,18 +71,22 @@ class BelongActivity : BaseActivity() {
                 if(response.code() == 200){
                     boardList = mutableListOf()
                     val jsonArray = JSONArray(response.body()!!.string())
+                    Log.d("jsonArray", jsonArray.toString())
+
                     for(idx in 0 until jsonArray.length()){
                         val tempBoard = jsonArray[idx] as JSONObject
                         val boardName = tempBoard.getString("category")
                         val boardExplanation = tempBoard.getString("explanation")
-                        val boardId = tempBoard.getLong("boardId")
+                        val boardId = tempBoard.getLong("id")
                         val board = Board(boardName, boardExplanation, boardId)
                         boardList.add(board)
                     }
 
                     Log.d("boardList", boardList.size.toString())
                     runOnUiThread{
+                        Log.d("recyc", "recyc")
                         initRecyclerView()
+                        Log.d("there", "there")
                     }
                 }
             }

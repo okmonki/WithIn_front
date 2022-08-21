@@ -65,9 +65,9 @@ class PostActivity : BaseActivity() {
     }
 
 
-    private val pref = getSharedPreferences(USER_INFO, MODE_PRIVATE)
-    private val userId = pref.getLong("user id", -1)
-
+//    private val pref = getSharedPreferences(USER_INFO, MODE_PRIVATE)
+//    private val userId = pref.getLong("user id", -1)
+    val userId = 1L
 
 
     private val commentContainer : RecyclerView by lazy{
@@ -82,7 +82,8 @@ class PostActivity : BaseActivity() {
         val intent = intent
 
         // TODO default 0으로 바꿔주어야 함
-        val postId = intent.getLongExtra("postId", 0)
+        val postId = 1L
+//        val postId = intent.getLongExtra("postId", 0)
         if(postId == 0L){
             Toast.makeText(this, "게시글 조회에 실패했습니다.", Toast.LENGTH_SHORT).show()
             finish()

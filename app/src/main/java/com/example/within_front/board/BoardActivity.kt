@@ -52,10 +52,13 @@ class BoardActivity : BaseActivity() {
             Toast.makeText(this, "게시판 조회에 실패했습니다.", Toast.LENGTH_SHORT).show()
             finish()
         }
+        Log.d("onC", "onC")
         getPost(boardId)
+        Log.d("getPost", "getPost")
         setBoardName(boardId)
+        Log.d("setBoardName", "setBoardName")
         initBackImageButton()
-        initPencilImageButton(initView())
+        initPencilImageButton(boardId)
 
         initNavigation("board")
     }
@@ -94,7 +97,7 @@ class BoardActivity : BaseActivity() {
                         val author = tempPost.getString("authorNickname")
                         val content = tempPost.getString("content")
                         val commentCount = tempPost.getInt("commentCount")
-                        val likeCount = tempPost.getInt("liked")
+                        val likeCount = tempPost.getInt("likeCount")
                         val postId = tempPost.getLong("id")
 
                         val post = Post(postTitle = postTitle, author = author,
@@ -106,6 +109,7 @@ class BoardActivity : BaseActivity() {
                     runOnUiThread{
                         initRecyclerView()
                     }
+                    Log.d("here", postList.size.toString())
                 }
             }
         })
@@ -139,16 +143,10 @@ class BoardActivity : BaseActivity() {
         }
     }
 
-    private fun initView() : String{
-        val intent=intent
-        val postId=intent.getStringExtra("category")
-        return postId!!
-    }
-
-    private fun initPencilImageButton(category : String) {
+    private fun initPencilImageButton(boardId : Long) {
         pencilImageButton.setOnClickListener {
             val intent = Intent(this, WriteANewPostActivity::class.java)
-            intent.putExtra("category", category)
+            intent.putExtra("boardId", boardId)
             startActivity(intent)
         }
     }
