@@ -52,11 +52,8 @@ class BoardActivity : BaseActivity() {
             Toast.makeText(this, "게시판 조회에 실패했습니다.", Toast.LENGTH_SHORT).show()
             finish()
         }
-        Log.d("onC", "onC")
         getPost(boardId)
-        Log.d("getPost", "getPost")
         setBoardName(boardId)
-        Log.d("setBoardName", "setBoardName")
         initBackImageButton()
         initPencilImageButton(boardId)
 
@@ -133,7 +130,9 @@ class BoardActivity : BaseActivity() {
 
             override fun onResponse(call: Call, response: Response) {
                 if(response.code() == 200){
-                    boardName.text = response.body()!!.string()
+                    runOnUiThread {
+                        boardName.text = response.body()!!.string()
+                    }
         } } })
     }
 

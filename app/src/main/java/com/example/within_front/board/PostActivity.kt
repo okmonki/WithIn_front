@@ -91,7 +91,6 @@ class PostActivity : BaseActivity() {
         getComments(postId)
         getPost(postId)
         setHeart(postId)
-        Log.d("test", "test")
         initWriteCommentButton(postId)
         initLikeButton(postId)
         initBackImageButton()
@@ -162,14 +161,15 @@ class PostActivity : BaseActivity() {
                 if(response.code() == 200){
                     commentList = mutableListOf()
                     val tempPost = JSONObject(response.body()!!.string())
-
-                    boardName.text = tempPost.getString("boardName").plus(" 게시판")
-                    postTitle.text = tempPost.getString("title")
-                    author.text = tempPost.getString("authorNickname")
-                    content.text = tempPost.getString("content")
-                    commentCount.text = tempPost.getInt("commentCount").toString()
-                    likeCount.text = tempPost.getInt("liked").toString()
-                    date.text = tempPost.getString("createdAt")
+                    runOnUiThread {
+                        boardName.text = tempPost.getString("boardName").plus(" 게시판")
+                        postTitle.text = tempPost.getString("title")
+                        author.text = tempPost.getString("authorNickname")
+                        content.text = tempPost.getString("content")
+                        commentCount.text = tempPost.getInt("commentCount").toString()
+                        likeCount.text = tempPost.getInt("likeCount").toString()
+                        date.text = tempPost.getString("createdAt")
+                    }
                 }
             }
         })

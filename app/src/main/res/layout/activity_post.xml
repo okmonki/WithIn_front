@@ -92,7 +92,7 @@
                 app:layout_constraintEnd_toEndOf="@id/nickname"
                 />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/like_img"
                 android:src="@drawable/heart_empty"
                 android:layout_width="13dp"

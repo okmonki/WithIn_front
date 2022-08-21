@@ -39,7 +39,7 @@ class BelongActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_belong)
         // TODO
-//        pref.getLong("user id", -1)
+        userId = pref.getLong("user id", -1)
         initRecyclerView()
         setUnit(userId)
         getBoard(userId)
@@ -49,8 +49,6 @@ class BelongActivity : BaseActivity() {
         belongContainer.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         belongContainer.adapter = BoardAdapter(this, boardList)
     }
-
-
     private fun getBoard(userId : Long){
         val getBoardRequest = Request.Builder().addHeader("Content-Type", "application/json").url("http:52.78.137.155:8080/post/$userId/boards").build()
         client.newCall(getBoardRequest).enqueue(object: Callback {
@@ -111,8 +109,9 @@ class BelongActivity : BaseActivity() {
             override fun onResponse(call: Call, response: Response) {
                 if(response.code() == 200){
                     val tempUnit = JSONObject(response.body()!!.string())
-                    belong.text = tempUnit.getString("unitName")
-
+                    runOnUiThread {
+                        belong.text = tempUnit.getString("unitName")
+                    }
                 }
             }
         })
