@@ -17,7 +17,7 @@
         android:theme="@style/Theme.WithIn_front"
         tools:targetApi="31">
         <activity
-            android:name=".login.LoginActivity"
+            android:name=".board.WriteANewPostActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +28,7 @@
         <activity android:name=".board.BelongActivity"/>
         <activity android:name=".board.BoardActivity"/>
         <activity android:name=".board.PostActivity"/>
-        <activity android:name=".board.WriteANewPostActivity"/>
+        <activity android:name=".login.LoginActivity"/>
         <activity android:name=".login.SignupActivity"/>
         <activity android:name=".login.InterestActivity"/>
         <activity android:name=".menu.MenuActivity"/>

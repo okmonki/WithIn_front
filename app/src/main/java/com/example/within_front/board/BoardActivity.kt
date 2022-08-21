@@ -56,7 +56,7 @@ class BoardActivity : BaseActivity() {
         setBoardName(boardId)
         initRecyclerView()
         initBackImageButton()
-        initPencilImageButton(initView())
+        initPencilImageButton(boardId)
 
         initNavigation("board")
     }
@@ -140,16 +140,10 @@ class BoardActivity : BaseActivity() {
         }
     }
 
-    private fun initView() : String{
-        val intent=intent
-        val postId=intent.getStringExtra("category")
-        return postId!!
-    }
-
-    private fun initPencilImageButton(category : String) {
+    private fun initPencilImageButton(boardId : Long) {
         pencilImageButton.setOnClickListener {
             val intent = Intent(this, WriteANewPostActivity::class.java)
-            intent.putExtra("category", category)
+            intent.putExtra("boardId", boardId)
             startActivity(intent)
         }
     }
