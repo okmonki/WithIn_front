@@ -19,6 +19,9 @@ import java.util.*
 class MyGroupReadActivity : BaseActivity() {
 
     private val client = OkHttpClient()
+    private val pref by lazy{
+        getSharedPreferences(USER_INFO, MODE_PRIVATE)
+    }
     private var hobbyList = mutableListOf<Hobby>()
 
     private val backButton : ImageButton by lazy{
@@ -43,10 +46,11 @@ class MyGroupReadActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.my_group_read)
+        val userId = pref.getLong("user id", -1)
 
         initBackButton()
         initCreateButton()
-        getMyGroup(1)
+        getMyGroup(userId)
 
         initNavigation("myPage")
     }
@@ -112,5 +116,8 @@ class MyGroupReadActivity : BaseActivity() {
                 }
             }
         })
+    }
+    companion object{
+        const val USER_INFO = "user info"
     }
 }
