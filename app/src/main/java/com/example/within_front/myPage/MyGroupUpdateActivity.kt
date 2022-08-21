@@ -14,6 +14,9 @@ import kotlin.collections.ArrayList
 
 class MyGroupUpdateActivity : BaseActivity() {
     private val client = OkHttpClient()
+    private val pref by lazy{
+        getSharedPreferences(MyGroupReadActivity.USER_INFO, MODE_PRIVATE)
+    }
     private var unit : String = ""
     private var position : String = ""
     private var mbti : String = ""
@@ -71,9 +74,10 @@ class MyGroupUpdateActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.my_group_update)
+        val userId = pref.getLong("user id", -1)
 
         initBackButton()
-        initCompleteButton(1)
+        initCompleteButton(userId)
 
         val unitAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, unitItems)
         unitSpinner.adapter = unitAdapter
